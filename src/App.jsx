@@ -1,17 +1,14 @@
 import Header from "./components/Header";
-import ContactForm from "./components/contactForm/ContactForm.jsx";
-import ContactList from "./components/ContactList/ContactList.jsx";
 import { useState } from "react";
-
+import Contacts from "./components/Contacts.jsx";
 function App() {
-  const [currentPage, setCurrentPage] = useState('contactList');
+  const [currentPage, setCurrentPage] = useState("contactList");
   return (
     <>
-     <Header  setCurrentPage ={setCurrentPage}/>
-     {currentPage === 'contactForm' && <ContactForm setCurrentPage ={setCurrentPage} />}
-      {currentPage === 'contactList' && <ContactList />}
+      <Header setCurrentPage={setCurrentPage} />
+      <Contacts currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

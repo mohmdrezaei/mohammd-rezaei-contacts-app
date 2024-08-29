@@ -42,6 +42,9 @@
     padding: 10px 20px ;
     border-radius: 999px;
 }
+.form input:focus {
+    outline: none;
+}
 .inputGroups{
     display:  flex;
     gap: 25px
@@ -60,4 +63,5 @@
     font-size: 18px;
     border-radius: 5px;
     margin-top: 15px;
+    cursor: pointer;
 }
