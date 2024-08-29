@@ -14,6 +14,9 @@
     font-size: 20px;
     color: #5f6368;
 }
+.icon img{
+    width: 40px;
+}
 .search{
     position: relative;
 }
@@ -21,21 +24,25 @@
     background-color: #F1F3F4;
     border: none;
     width: 300px;
-    height: 50px;
-    border-radius: 15px;
+    height: 45px;
+    border-radius: 10px;
     padding-left:3.5rem ;
     font-size: 1.2rem;
+    transition: all .3s ease-in-out;
     
 }
 .search input:focus {
     outline: none;
+    background-color: #fff;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / .1), 0 2px 4px -2px rgb(0 0 0 / .1);
 }
 .search img{
     width: 16px;
     position: absolute;
     z-index: 2;
-    top: 18px;
-    left: 18px;
+    top: 14px;
+    left: 20px;
+    
 }
 
 .addBtn{
@@ -45,6 +52,7 @@
     font-weight: 600;
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);
     cursor: pointer;
+    transition: all .2s ease-in-out;
 }
 .addBtn:hover{
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / .1), 0 2px 4px -2px rgb(0 0 0 / .1);

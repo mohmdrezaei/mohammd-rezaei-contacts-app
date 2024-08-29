@@ -1,6 +1,8 @@
 import styles from "./Header.module.css";
 
-function Header() {
+function Header(props) {
+  const {currentPage , setCurrentPage} = props;
+
   return (
     <div className={styles.container}>
       <div className={styles.icon}>
@@ -12,7 +14,7 @@ function Header() {
         <input type="text" name="" id="" placeholder="Search" />
       </div>
 
-      <div className={styles.addBtn}>
+      <div className={styles.addBtn} onClick={()=>setCurrentPage("contactForm")}>
         <img src="./src/assets/add.png" alt="" />
         <p>Create contact</p>
       </div>

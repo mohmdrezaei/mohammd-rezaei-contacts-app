@@ -1,0 +1,63 @@
+.container{
+    padding-top: 40px;
+}
+.title{
+    display: flex;
+    gap: 20px;
+}
+.title h1{
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.75rem;
+    margin-bottom: 1.5rem;
+
+}
+.title img{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.profile {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+    
+}
+
+.profile img{
+    width: 180px;
+    border-radius: 50%;
+}
+
+.form {
+    margin-top: 30px;
+}
+.form input{
+    border: none;
+    background-color:  #f4f4f4;
+    margin-bottom: 30px;
+    font-size: 18px;
+    width: 100%;
+    padding: 10px 20px ;
+    border-radius: 999px;
+}
+.inputGroups{
+    display:  flex;
+    gap: 25px
+}
+.inputGroups img{
+    width: 32px;
+    height: 32px;
+}
+
+.form button {
+    background: none;
+    border: none;
+    background-color: #696969;
+    padding: 10px 35px;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
