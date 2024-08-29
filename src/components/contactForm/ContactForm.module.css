@@ -36,22 +36,27 @@
 .form input{
     border: none;
     background-color:  #f4f4f4;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     font-size: 18px;
     width: 100%;
-    padding: 10px 20px ;
+    padding: 10px 60px ;
     border-radius: 999px;
+    
 }
 .form input:focus {
     outline: none;
 }
 .inputGroups{
-    display:  flex;
-    gap: 25px
+    margin-bottom:20px;
+    position: relative;
 }
 .inputGroups img{
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    top: 6px;
+    left: 15px;
+    z-index: 2;
 }
 
 .form button {
@@ -65,3 +70,9 @@
     margin-top: 15px;
     cursor: pointer;
 }
+
+.inputGroups span{
+  color: #ff0000;
+  margin-left: 10px;
+}
+
