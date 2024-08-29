@@ -29,7 +29,7 @@ function contactForm(props) {
     };
     setErrors(newErrors);
 
-    if (newErrors.every((error) => error === "")) {
+    if (Object.values(newErrors).every((error) => error === "")) {
     setContacts((contacts) => [...contacts, contact]);
     setCotact({
       name: "",
@@ -66,43 +66,22 @@ function contactForm(props) {
         />
       </div>
 
-      <div className={styles.form}>
-        <div className={styles.inputGroups}>
-          <img src="./src/assets/user-icon.png" alt="" />
-          <input
-            type="text"
-            placeholder="Name"
-            name="name"
-            value={contact.name}
-            onChange={changeHandler}
-          />
-             <span >{errors.name && errors.name}</span>
-        </div>
-     
-        <div className={styles.inputGroups}>
-          <img src="./src/assets/email.png" alt="" />
-          <input
-            type="email"
-            placeholder="email"
-            name="email"
-            value={contact.email}
-            onChange={changeHandler}
-          />
-           <span >{errors.email && errors.email}</span>
-        </div>
-        
-        <div className={styles.inputGroups}>
-          <img src="./src/assets/phone.png" alt="" />
-          <input
-            type="number"
-            placeholder="Phone number"
-            name="phone"
-            value={contact.phone}
-            onChange={changeHandler}
-          />
-           <span >{errors.phone && errors.phone}</span>
-        </div>
-        
+ <div className={styles.form}>
+        {Object.entries(errors).map(([field, error]) => (
+          
+          <div key={field} className={styles.inputGroups}>
+          
+            <img src={`./src/assets/${field}.png`} alt="" />
+            <input
+              type={field === "email" ? "email" : field === "phone" ? "number" : "text"}
+              placeholder={field}
+              name={field}
+              value={contact[field]}
+              onChange={changeHandler}
+            />
+             <span >{error && error}</span>
+          </div>
+        ))}
         <button onClick={addHandler}>Create</button>
       </div>
     </div>
