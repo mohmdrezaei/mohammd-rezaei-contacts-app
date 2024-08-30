@@ -10,13 +10,18 @@ function Contacts(props) {
     name: "",
     email: "",
     phone: "",
+    isEditing: false
   });
 
-  const deleteHandler = (id)=>{
-    const newContacts = contacts.filter(contact => contact.id !== id)
-    setContacts(newContacts)
-    }
- 
+  const deleteHandler = (id) => {
+    const newContacts = contacts.filter((contact) => contact.id !== id);
+    setContacts(newContacts);
+  };
+
+  const editHandler = (contact) => {
+    setCurrentPage("contactForm");
+    setContact({ ...contact, isEditing: true });
+  };
   return (
     <>
       {currentPage === "contactForm" && (
@@ -24,10 +29,17 @@ function Contacts(props) {
           setCurrentPage={setCurrentPage}
           contact={contact}
           setContact={setContact}
-          setContacts = {setContacts}
+          contacts={contacts}
+          setContacts={setContacts}
         />
       )}
-      {currentPage === "contactList" && <ContactList contacts ={contacts} deleteHandler={deleteHandler}/>}
+      {currentPage === "contactList" && (
+        <ContactList
+          contacts={contacts}
+          deleteHandler={deleteHandler}
+          editHandler={editHandler}
+        />
+      )}
     </>
   );
 }

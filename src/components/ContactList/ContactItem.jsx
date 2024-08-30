@@ -1,16 +1,16 @@
 import React from "react";
 import styles from "./ContactList.module.css";
-function ContactItem({ data: { id, name, email, phone }, deleteHandler }) {
+function ContactItem({ data, deleteHandler ,editHandler}) {
   return (
-    <tr key={id}>
-      <td>{name}</td>
-      <td>{email}</td>
-      <td>{phone}</td>
+    <tr key={data.id}>
+      <td>{data.name}</td>
+      <td>{data.email}</td>
+      <td>{data.phone}</td>
       <td className={styles.opration}>
-        <button>
+        <button onClick={()=>editHandler(data)}>
           <img src="./src/assets/pencil.png"></img>
         </button>
-        <button onClick={() => deleteHandler(id)}>
+        <button onClick={() => deleteHandler(data.id)}>
           <img src="./src/assets/trash-bin.png"></img>
         </button>
       </td>

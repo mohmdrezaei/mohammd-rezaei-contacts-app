@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./ContactForm.module.css";
 import { v4 } from "uuid";
 function contactForm(props) {
-  const { setCurrentPage, contact, setContact, setContacts } = props;
+  const { setCurrentPage, contact, setContact, contacts, setContacts } = props;
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -32,7 +32,12 @@ function contactForm(props) {
 
     if (Object.values(newErrors).every((error) => error === "")) {
       const newContact = { ...contact , id : v4() }
-    setContacts((contacts) => [...contacts, newContact]);
+      if (contact.isEditing) {
+        const updatedContacts = contacts.map((c) => (c.id === contact.id ? newContact : c));
+        setContacts(updatedContacts);
+      } else {
+        setContacts((contacts) => [...contacts, newContact]);
+      }
     setContact({
       name: "",
       email: "",
@@ -46,15 +51,18 @@ function contactForm(props) {
     setCurrentPage("contactList");
   }
   };
+  const routeHandler = () =>{
+    setCurrentPage("contactList")
+    setContact({isEditing: false});
+  } 
 
-  
   return (
     <div className={styles.container}>
       <div className={styles.title}>
         <img
           src="./src/assets/left-arrow.png"
           alt=""
-          onClick={() => setCurrentPage("contactList")}
+          onClick={routeHandler}
         />
         <h1>Contact List</h1>
       </div>
@@ -67,6 +75,7 @@ function contactForm(props) {
           }
           alt="user-profile"
         />
+        <div><p>{contact.name && contact.name}</p></div>
       </div>
 
  <div className={styles.form}>
@@ -85,7 +94,7 @@ function contactForm(props) {
              <span >{error && error}</span>
           </div>
         ))}
-        <button onClick={addHandler}>Create</button>
+        <button onClick={addHandler}>{contact.isEditing ? "Update" : "Create" }</button>
       </div>
     </div>
   );

@@ -1,13 +1,12 @@
-import React from 'react'
-import styles from "./ContactList.module.css"
-import ContactItem from './ContactItem'
+import React from "react";
+import styles from "./ContactList.module.css";
+import ContactItem from "./ContactItem";
 
-function ContactList({contacts , deleteHandler}) {
-  
+function ContactList({ contacts, deleteHandler, editHandler }) {
+  console.log(contacts)
   return (
     <div className={styles.container}>
-      
-        <table>
+      <table>
         <thead>
           <tr>
             <th>Name</th>
@@ -20,17 +19,22 @@ function ContactList({contacts , deleteHandler}) {
           <p>Contacts ({contacts.length})</p>
         </div>
         {contacts.length ? (
-        <tbody>
-          {contacts.map(contact => (
-            <ContactItem key={contact.id} data={contact} deleteHandler={deleteHandler}/>
-          ))}
-        </tbody>
-         ): <p> No Contacts Yet!</p>}
+          <tbody>
+            {contacts.map((contact) => (
+              <ContactItem
+                key={contact.id}
+                data={contact}
+                deleteHandler={deleteHandler}
+                editHandler={editHandler}
+              />
+            ))}
+          </tbody>
+        ) : (
+          <p> No Contacts Yet!</p>
+        )}
       </table>
-
-     
     </div>
-  )
+  );
 }
 
-export default ContactList
+export default ContactList;
