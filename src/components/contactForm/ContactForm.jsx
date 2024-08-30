@@ -43,7 +43,6 @@ function contactForm(props) {
       email: "",
       phone: "",
     })
-    console.log(errors)
     setCurrentPage("contactList");
   }
   };

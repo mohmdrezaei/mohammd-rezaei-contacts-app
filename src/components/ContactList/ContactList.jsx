@@ -1,11 +1,13 @@
 import React from 'react'
 import styles from "./ContactList.module.css"
+import ContactItem from './ContactItem'
 
 function ContactList({contacts}) {
   
   return (
     <div className={styles.container}>
-      <table>
+      
+        <table>
         <thead>
           <tr>
             <th>Name</th>
@@ -15,23 +17,18 @@ function ContactList({contacts}) {
           </tr>
         </thead>
         <div className={styles.count}>
-          <p>Contacts (20)</p>
+          <p>Contacts ({contacts.length})</p>
         </div>
-
+        {contacts.length ? (
         <tbody>
           {contacts.map(contact => (
-            <tr key={contact.id}>
-              <td><img src={contact.profileImageUrl}></img>{contact.name}</td>
-              <td>{contact.email}</td>
-              <td>{contact.phone}</td>
-              <td className={styles.opration}>
-                 <button><img src="./src/assets/pencil.png"></img></button>
-                 <button><img src="./src/assets/trash-bin.png"></img></button>
-              </td>
-            </tr>
+            <ContactItem key={contact.id} data={contact}/>
           ))}
         </tbody>
+         ): <p> No Contacts Yet!</p>}
       </table>
+
+     
     </div>
   )
 }
