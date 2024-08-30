@@ -2,7 +2,7 @@ import React from 'react'
 import styles from "./ContactList.module.css"
 import ContactItem from './ContactItem'
 
-function ContactList({contacts}) {
+function ContactList({contacts , deleteHandler}) {
   
   return (
     <div className={styles.container}>
@@ -22,7 +22,7 @@ function ContactList({contacts}) {
         {contacts.length ? (
         <tbody>
           {contacts.map(contact => (
-            <ContactItem key={contact.id} data={contact}/>
+            <ContactItem key={contact.id} data={contact} deleteHandler={deleteHandler}/>
           ))}
         </tbody>
          ): <p> No Contacts Yet!</p>}

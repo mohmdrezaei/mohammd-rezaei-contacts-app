@@ -46,6 +46,8 @@ function contactForm(props) {
     setCurrentPage("contactList");
   }
   };
+
+  
   return (
     <div className={styles.container}>
       <div className={styles.title}>

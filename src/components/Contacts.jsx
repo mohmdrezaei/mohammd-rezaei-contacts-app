@@ -11,6 +11,11 @@ function Contacts(props) {
     email: "",
     phone: "",
   });
+
+  const deleteHandler = (id)=>{
+    const newContacts = contacts.filter(contact => contact.id !== id)
+    setContacts(newContacts)
+    }
  
   return (
     <>
@@ -22,7 +27,7 @@ function Contacts(props) {
           setContacts = {setContacts}
         />
       )}
-      {currentPage === "contactList" && <ContactList contacts ={contacts}/>}
+      {currentPage === "contactList" && <ContactList contacts ={contacts} deleteHandler={deleteHandler}/>}
     </>
   );
 }
