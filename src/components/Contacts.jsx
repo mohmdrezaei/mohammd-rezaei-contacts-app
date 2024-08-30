@@ -6,10 +6,12 @@ function Contacts(props) {
   const { currentPage, setCurrentPage } = props;
   const [contacts, setContacts] = useState([]);
   const [contact, setContact] = useState({
+    id: "",
     name: "",
     email: "",
     phone: "",
   });
+ 
   return (
     <>
       {currentPage === "contactForm" && (

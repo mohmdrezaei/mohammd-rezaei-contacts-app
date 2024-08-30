@@ -3,7 +3,6 @@ import styles from "./ContactList.module.css"
 
 function ContactList({contacts}) {
   
-  console.log(contacts)
   return (
     <div className={styles.container}>
       <table>
@@ -21,7 +20,7 @@ function ContactList({contacts}) {
 
         <tbody>
           {contacts.map(contact => (
-            <tr>
+            <tr key={contact.id}>
               <td><img src={contact.profileImageUrl}></img>{contact.name}</td>
               <td>{contact.email}</td>
               <td>{contact.phone}</td>

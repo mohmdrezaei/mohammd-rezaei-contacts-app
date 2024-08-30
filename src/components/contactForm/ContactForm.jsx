@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./ContactForm.module.css";
+import { v4 } from "uuid";
 function contactForm(props) {
   const { setCurrentPage, contact, setContact, setContacts } = props;
   const [errors, setErrors] = useState({
@@ -30,7 +31,8 @@ function contactForm(props) {
     setErrors(newErrors);
 
     if (Object.values(newErrors).every((error) => error === "")) {
-    setContacts((contacts) => [...contacts, contact]);
+      const newContact = { ...contact , id : v4() }
+    setContacts((contacts) => [...contacts, newContact]);
     setContact({
       name: "",
       email: "",
