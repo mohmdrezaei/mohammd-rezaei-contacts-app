@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./ContactForm.module.css";
 function contactForm(props) {
-  const { setCurrentPage, contact, setCotact, setContacts } = props;
+  const { setCurrentPage, contact, setContact, setContacts } = props;
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -11,7 +11,7 @@ function contactForm(props) {
   const changeHandler = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setCotact((contact) => ({ ...contact, [name]: value }));
+    setContact((contact) => ({ ...contact, [name]: value }));
   };
 
   const validateEmail = (email) => {
@@ -31,7 +31,7 @@ function contactForm(props) {
 
     if (Object.values(newErrors).every((error) => error === "")) {
     setContacts((contacts) => [...contacts, contact]);
-    setCotact({
+    setContact({
       name: "",
       email: "",
       phone: "",

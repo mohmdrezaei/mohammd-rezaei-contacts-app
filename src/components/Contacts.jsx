@@ -5,7 +5,7 @@ import ContactList from "./ContactList/ContactList.jsx";
 function Contacts(props) {
   const { currentPage, setCurrentPage } = props;
   const [contacts, setContacts] = useState([]);
-  const [contact, setCotact] = useState({
+  const [contact, setContact] = useState({
     name: "",
     email: "",
     phone: "",
@@ -16,7 +16,7 @@ function Contacts(props) {
         <ContactForm
           setCurrentPage={setCurrentPage}
           contact={contact}
-          setCotact={setCotact}
+          setContact={setContact}
           setContacts = {setContacts}
         />
       )}
