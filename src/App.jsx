@@ -6,9 +6,10 @@ function App() {
   const [contacts, setContacts] = useState(JSON.parse(localStorage.getItem("contacts")) || []);
   const [filteredContacts, setFilteredContacts] = useState(contacts);
   
-  useEffect (()=>{
-    setFilteredContacts(contacts)
-  }, [contacts])
+  const updateContacts = (newContacts) => {
+    setContacts(newContacts);
+    setFilteredContacts(newContacts);
+  };
   return (
     <>
       <Header setCurrentPage={setCurrentPage} contacts={contacts}
@@ -17,7 +18,7 @@ function App() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         contacts={filteredContacts}
-        setContacts={setContacts}
+        setContacts={updateContacts}
       />
     </>
   );

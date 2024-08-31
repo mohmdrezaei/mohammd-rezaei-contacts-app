@@ -3,7 +3,6 @@ import styles from "./ContactList.module.css";
 import ContactItem from "./ContactItem";
 
 function ContactList({ contacts, deleteHandler, editHandler }) {
-  console.log(contacts)
   return (
     <div className={styles.container}>
       <table>

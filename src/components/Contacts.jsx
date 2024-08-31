@@ -4,8 +4,6 @@ import ContactList from "./ContactList/ContactList.jsx";
 
 function Contacts(props) {
   const { currentPage, setCurrentPage ,contacts ,setContacts } = props;
-  console.log(contacts)
-
   const [contact, setContact] = useState({
     id: "",
     name: "",
