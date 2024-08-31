@@ -20,9 +20,11 @@ function Contacts(props) {
     setTimeout(() => setToast({ show: false, message: "" }), 3000);
   };
 
-  const deleteHandler = (id) => {
+  const deleteHandler = (ids) => {
     if (confirm("Delete contact?")) {
-      const newContacts = contacts.filter((contact) => contact.id !== id);
+      const newContacts = contacts.filter(
+        (contact) => !ids.includes(contact.id)
+      );
       setContacts(newContacts);
       localStorage.setItem("contacts", JSON.stringify(newContacts));
       showToast("Contact deleted!");
