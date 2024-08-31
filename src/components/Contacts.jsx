@@ -3,8 +3,9 @@ import ContactForm from "./contactForm/ContactForm.jsx";
 import ContactList from "./ContactList/ContactList.jsx";
 
 function Contacts(props) {
-  const { currentPage, setCurrentPage } = props;
-  const [contacts, setContacts] = useState([]);
+  const { currentPage, setCurrentPage ,contacts ,setContacts } = props;
+  console.log(contacts)
+
   const [contact, setContact] = useState({
     id: "",
     name: "",
@@ -16,6 +17,7 @@ function Contacts(props) {
   const deleteHandler = (id) => {
     const newContacts = contacts.filter((contact) => contact.id !== id);
     setContacts(newContacts);
+    localStorage.setItem("contacts", JSON.stringify(newContacts));
   };
 
   const editHandler = (contact) => {

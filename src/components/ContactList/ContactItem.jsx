@@ -3,7 +3,10 @@ import styles from "./ContactList.module.css";
 function ContactItem({ data, deleteHandler ,editHandler}) {
   return (
     <tr key={data.id}>
-      <td>{data.name}</td>
+      <td>
+      
+        {data.name}
+        </td>
       <td>{data.email}</td>
       <td>{data.phone}</td>
       <td className={styles.opration}>
@@ -13,7 +16,9 @@ function ContactItem({ data, deleteHandler ,editHandler}) {
         <button onClick={() => deleteHandler(data.id)}>
           <img src="./src/assets/trash-bin.png"></img>
         </button>
+        <input className={styles.checkbox} type="checkbox" />
       </td>
+     
     </tr>
   );
 }

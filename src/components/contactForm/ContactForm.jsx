@@ -32,12 +32,14 @@ function contactForm(props) {
 
     if (Object.values(newErrors).every((error) => error === "")) {
       const newContact = { ...contact , id : v4() }
+      let updatedContacts;
       if (contact.isEditing) {
-        const updatedContacts = contacts.map((c) => (c.id === contact.id ? newContact : c));
-        setContacts(updatedContacts);
+        updatedContacts = contacts.map((c) => (c.id === contact.id ? newContact : c));
       } else {
-        setContacts((contacts) => [...contacts, newContact]);
+        updatedContacts = [...contacts, newContact];
       }
+      setContacts(updatedContacts);
+      localStorage.setItem("contacts", JSON.stringify(updatedContacts));
     setContact({
       name: "",
       email: "",
@@ -75,7 +77,7 @@ function contactForm(props) {
           }
           alt="user-profile"
         />
-        <div><p>{contact.name && contact.name}</p></div>
+        
       </div>
 
  <div className={styles.form}>

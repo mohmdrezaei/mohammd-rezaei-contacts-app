@@ -55,3 +55,18 @@
 .opration button:hover {
     transform: translateY(-5px);
 }
+
+.container input{
+    margin-right: 10px;
+}
+.groupDelete{
+    width: 20px;
+    margin-left: 40px;
+    cursor: pointer;
+}
+.groupDelete:hover{
+    transform: translateY(-5px);
+}
+.checkbox {
+    margin-left: 40px;
+}

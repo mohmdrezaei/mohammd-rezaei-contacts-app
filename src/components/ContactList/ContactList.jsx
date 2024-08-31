@@ -12,7 +12,8 @@ function ContactList({ contacts, deleteHandler, editHandler }) {
             <th>Name</th>
             <th>email</th>
             <th>Phone Number</th>
-            <th>Opration</th>
+            <th>Opration  <img title="Group Delete" className={styles.groupDelete} src="./src/assets/trash-bin.png" alt="" /></th>
+           
           </tr>
         </thead>
         <div className={styles.count}>
