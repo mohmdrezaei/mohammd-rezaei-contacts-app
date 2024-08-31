@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styles from "./ContactForm.module.css";
 import { v4 } from "uuid";
+
 function contactForm(props) {
-  const { setCurrentPage, contact, setContact, contacts, setContacts } = props;
+  const { setCurrentPage, contact, setContact, contacts, setContacts ,showToast } = props;
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -35,8 +36,10 @@ function contactForm(props) {
       let updatedContacts;
       if (contact.isEditing) {
         updatedContacts = contacts.map((c) => (c.id === contact.id ? newContact : c));
+        showToast('Contact Updated!');
       } else {
         updatedContacts = [...contacts, newContact];
+        showToast("Contact added!");
       }
       setContacts(updatedContacts);
       localStorage.setItem("contacts", JSON.stringify(updatedContacts));

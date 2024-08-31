@@ -1,5 +1,5 @@
 import Header from "./components/Header";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import Contacts from "./components/Contacts.jsx";
 function App() {
   const [currentPage, setCurrentPage] = useState("contactList");
@@ -20,6 +20,7 @@ function App() {
         contacts={filteredContacts}
         setContacts={updateContacts}
       />
+      
     </>
   );
 }

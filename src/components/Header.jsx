@@ -31,7 +31,7 @@ function Header(props) {
         <img src="./src/assets/search.png" alt="" />
         <input
           type="text"
-          placeholder="Search by name or email"
+          placeholder="Search"
            value={searchTerm}
           onChange={handleSearchChange}
         />

@@ -1,21 +1,31 @@
 import React, { useState } from "react";
 import ContactForm from "./contactForm/ContactForm.jsx";
 import ContactList from "./ContactList/ContactList.jsx";
+import Toast from "./toast/Toast.jsx";
 
 function Contacts(props) {
-  const { currentPage, setCurrentPage ,contacts ,setContacts } = props;
+  const { currentPage, setCurrentPage, contacts, setContacts } = props;
+  const [toast, setToast] = useState({ show: false, message: "" });
   const [contact, setContact] = useState({
     id: "",
     name: "",
     email: "",
     phone: "",
-    isEditing: false
+    isEditing: false,
   });
 
+  const showToast = (message) => {
+    setToast({ show: true, message });
+    setTimeout(() => setToast({ show: false, message: "" }), 3000);
+  };
+
   const deleteHandler = (id) => {
-    const newContacts = contacts.filter((contact) => contact.id !== id);
-    setContacts(newContacts);
-    localStorage.setItem("contacts", JSON.stringify(newContacts));
+    if (confirm("Delete contact?")) {
+      const newContacts = contacts.filter((contact) => contact.id !== id);
+      setContacts(newContacts);
+      localStorage.setItem("contacts", JSON.stringify(newContacts));
+      showToast("Contact deleted!");
+    }
   };
 
   const editHandler = (contact) => {
@@ -24,6 +34,7 @@ function Contacts(props) {
   };
   return (
     <>
+      <Toast message={toast.message} show={toast.show} />
       {currentPage === "contactForm" && (
         <ContactForm
           setCurrentPage={setCurrentPage}
@@ -31,6 +42,7 @@ function Contacts(props) {
           setContact={setContact}
           contacts={contacts}
           setContacts={setContacts}
+          showToast={showToast}
         />
       )}
       {currentPage === "contactList" && (
