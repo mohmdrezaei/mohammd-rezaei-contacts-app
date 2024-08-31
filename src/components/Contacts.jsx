@@ -11,6 +11,7 @@ function Contacts(props) {
     name: "",
     email: "",
     phone: "",
+    photo: "",
     isEditing: false,
   });
 

@@ -10,7 +10,7 @@
 }
 .container table thead {
     position: sticky;
-    top: 16px;
+    top: 0;
     z-index: 10;
     border-bottom: 1px solid #ccc;
 }
@@ -69,4 +69,14 @@
 }
 .checkbox {
     margin-left: 40px;
+}
+
+.profile{
+   display: flex;
+   align-items: center;
+   gap: 20px;
+}
+.profile img{
+    width: 35px;
+    border-radius: 50%;
 }
