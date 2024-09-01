@@ -20,7 +20,8 @@ function Contacts(props) {
     setTimeout(() => setToast({ show: false, message: "" }), 3000);
   };
 
-  const deleteHandler = (ids) => {
+  const deleteHandler = (e, ids) => {
+    e.stopPropagation();
     if (confirm("Delete contact?")) {
       const newContacts = contacts.filter(
         (contact) => !ids.includes(contact.id)
@@ -31,10 +32,12 @@ function Contacts(props) {
     }
   };
 
-  const editHandler = (contact) => {
+  const editHandler = (e, contact) => {
+    e.stopPropagation();
     setCurrentPage("contactForm");
     setContact({ ...contact, isEditing: true });
   };
+
   return (
     <>
       <Toast message={toast.message} show={toast.show} />

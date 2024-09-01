@@ -8,6 +8,7 @@
     width: 100%;
     margin-top: 20px;
 }
+
 .container table thead {
     position: sticky;
     top: 0;
@@ -22,12 +23,12 @@
     text-align: left;
     padding: 12px 16px;
     background-color: #fff;
-    border-bottom: 1px solid #ccc;
-
 }
+
 .count {
     margin: 20px 0;
 }
+
 .count p {
     text-transform: uppercase;
     font-size: 12px;
@@ -35,51 +36,101 @@
     opacity: 0.56;
     padding: 0 16px;
 }
+
 .container table tbody td {
-    padding: 18px 16px ;
+    padding: 18px 16px;
     cursor: pointer;
     border-bottom: 1px solid #ccc;
 }
+
+.container table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
 .container table tbody tr:hover {
     background-color: #F5F5F5
 }
+
+th:last-child {
+    display: flex;
+}
+
 .opration button {
     background: none;
     border: none;
     cursor: pointer;
     transition: all .2s ease-in-out;
 }
+
 .opration img {
     width: 19px;
     margin-right: 20px;
 }
+
 .opration button:hover {
     transform: translateY(-5px);
 }
 
-.container input{
+.container input {
     margin-right: 10px;
 }
-.groupDelete{
+
+.groupDelete {
     width: 25px;
     margin-left: 40px;
     cursor: pointer;
-    
-}
-.groupDelete:hover{
-    transform: translateY(-5px);
-}
-.checkbox {
-    margin-left: 40px;
-    cursor:pointer
+
 }
 
-.profile{
-   display: flex;
-   align-items: center;
-   gap: 20px;
+.groupDelete:hover {
+    transform: translateY(-5px);
 }
-.profile img{
+
+.checkbox {
+    margin-left: 40px;
+    cursor: pointer
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile img {
     width: 35px;
     border-radius: 50%;
+}
+
+@media (max-width:800px) {
+    .checkbox {
+        margin-left: 0;
+    }
+}
+
+@media (max-width : 670px) {
+
+    .container table th {
+        width: auto;
+        text-align: center;
+        align-items: center;
+    }
+
+    th:nth-child(1),
+    th:nth-child(2),
+    th:nth-child(3) {
+        display: none;
+    }
+
+    th:last-child {
+        width: 100%;
+        border-bottom: none;
+    }
+
+    tbody tr td:nth-child(2),
+    tbody tr td:nth-child(3) {
+        display: none;
+    }
+
 }

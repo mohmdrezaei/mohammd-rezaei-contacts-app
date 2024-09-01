@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styles from "./ContactList.module.css";
 import ContactItem from "./ContactItem";
 
-function ContactList({ contacts, deleteHandler, editHandler }) {
+function ContactList({ contacts, deleteHandler, editHandler ,setCurrentPage }) {
+  
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [selectedContacts , setSelectedContacts] = useState([])
 
