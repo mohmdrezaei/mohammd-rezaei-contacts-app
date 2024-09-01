@@ -102,6 +102,14 @@ th:last-child {
     width: 35px;
     border-radius: 50%;
 }
+.close{
+    background: none;
+    border: none;
+    color: #ff0000;
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 20px;
+}
 
 @media (max-width:800px) {
     .checkbox {

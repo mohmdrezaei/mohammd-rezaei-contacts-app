@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./ContactList.module.css";
 import ContactItem from "./ContactItem";
 
-function ContactList({ contacts, deleteHandler, editHandler ,setCurrentPage }) {
+function ContactList({ contacts, deleteHandler, editHandler }) {
   
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [selectedContacts , setSelectedContacts] = useState([])
@@ -48,12 +48,21 @@ function ContactList({ contacts, deleteHandler, editHandler ,setCurrentPage }) {
                 onClick={toggleCheckboxes}
               />)
               :(
-                <img
+                <><img
                 title="Group Delete"
                 className={styles.groupDelete}
                 src={"./src/assets/trash-bin.png"}
                 onClick={deleteSelectedHandler}
               />
+              <button
+              title="cancel"
+              className={styles.close}
+              onClick={(e) => setShowCheckboxes(false)}
+            >
+              &#10006;
+            </button>
+                </>
+              
               )}
             </th>
           </tr>
