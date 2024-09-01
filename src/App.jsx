@@ -20,7 +20,6 @@ function App() {
         contacts={filteredContacts}
         setContacts={updateContacts}
       />
-      
     </>
   );
 }

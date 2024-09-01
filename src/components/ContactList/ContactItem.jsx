@@ -18,10 +18,10 @@ function ContactItem({
       <td>{data.email}</td>
       <td>{data.phone}</td>
       <td className={styles.opration}>
-        <button onClick={(e) => editHandler(e,data)}>
+        <button onClick={() => editHandler(data)}>
           <img src="./src/assets/pencil.png" />
         </button>
-        <button onClick={(e) => deleteHandler(e,data.id)}>
+        <button onClick={() => deleteHandler(data.id)}>
           <img src="./src/assets/trash-bin.png" />
         </button>{" "}
         {showCheckbox && (
