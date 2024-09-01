@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./ContactForm.module.css";
 import { v4 } from "uuid";
+import success from "/src/assets/check.png"
 
 function contactForm(props) {
   const {
@@ -56,10 +57,10 @@ function contactForm(props) {
         updatedContacts = contacts.map((c) =>
           c.id === contact.id ? newContact : c
         );
-        showToast("Contact Updated!");
+        showToast("Contact Updated!" ,success );
       } else {
         updatedContacts = [...contacts, newContact];
-        showToast("Contact added!");
+        showToast("Contact added!" ,success );
       }
       setContacts(updatedContacts);
       localStorage.setItem("contacts", JSON.stringify(updatedContacts));
@@ -119,7 +120,8 @@ function contactForm(props) {
             <span>{error && error}</span>
           </div>
         ))}
-        <button onClick={addHandler}>
+        <button
+         onClick={addHandler}>
           {contact.isEditing ? "Update" : "Create"}
         </button>
       </div>

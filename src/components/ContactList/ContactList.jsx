@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styles from "./ContactList.module.css";
 import ContactItem from "./ContactItem";
 
-function ContactList({ contacts, deleteHandler, editHandler }) {
+
+function ContactList({ contacts, deleteHandler, editHandler ,showToast }) {
   
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [selectedContacts , setSelectedContacts] = useState([])
@@ -22,7 +23,7 @@ function ContactList({ contacts, deleteHandler, editHandler }) {
 
   const deleteSelectedHandler = () => {
     if(selectedContacts.length === 0){
-      alert("Select at least one item")
+      showToast("You must select at least one item!" , "./src/assets/warning.png")
       return;
     }
     deleteHandler(selectedContacts);

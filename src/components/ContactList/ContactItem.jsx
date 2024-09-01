@@ -1,16 +1,16 @@
 import React from "react";
 import styles from "./ContactList.module.css";
-function ContactItem({
-  data,
-  deleteHandler,
-  editHandler,
-  showCheckbox,
-  contactSelectHandler,
-  isSelected,
-}) {
-  
+function ContactItem(props) {
+  const {
+    data,
+    deleteHandler,
+    editHandler,
+    showCheckbox,
+    contactSelectHandler,
+    isSelected,
+  } = props;
   return (
-    <tr key={data.id} >
+    <tr key={data.id}>
       <td className={styles.profile}>
         <img src={data.photo} alt="" />
         {data.name}

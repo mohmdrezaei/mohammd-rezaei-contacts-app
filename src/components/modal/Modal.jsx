@@ -1,6 +1,6 @@
 import styles from './Modal.module.css'
 
-const Modal = ({ show, onClose, onConfirm }) => {
+const Modal = ({ show, onClose, onConfirm ,message}) => {
     if (!show) {
       return null;
     }
@@ -10,7 +10,7 @@ const Modal = ({ show, onClose, onConfirm }) => {
         <div className={styles.modal}>
             <div className={styles.modalContent}>
             <h2>Confirm Delete</h2>
-          <p>Are you sure you want to delete the contact?</p>
+          <p>{message}</p>
           <button className={styles.cancel} onClick={onClose}>Cancel</button>
           <button className={styles.delete} onClick={onConfirm}>Delete</button>
             </div>

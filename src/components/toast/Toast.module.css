@@ -21,7 +21,9 @@
   .toast.show {
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
   }
-  
+  .toast img{
+    width: 30px;
+  }
   
   @keyframes fadein {
     from {top: 0; opacity: 0;}
