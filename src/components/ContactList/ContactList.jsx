@@ -52,7 +52,7 @@ function ContactList({ contacts, deleteHandler, editHandler ,showToast ,contactC
                 title="Group Delete"
                 className={styles.groupDelete}
                 src={"./src/assets/trash-bin.png"}
-                onClick={(e)=>deleteSelectedHandler(e)}
+                onClick={deleteSelectedHandler}
               />
               <button
               title="cancel"

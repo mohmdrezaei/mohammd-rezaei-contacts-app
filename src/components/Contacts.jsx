@@ -22,16 +22,11 @@ function Contacts(props) {
     setToast({ show: true, message ,icon });
     setTimeout(() => setToast({ show: false, message: "" ,icon:"" }), 3000);
   };
-  const deleteHandler = (e,ids) => {
-    if (ids) {
-      e.stopPropagation();
-    }
+  const deleteHandler = (ids) => {
     setModal({ show: true, ids });
-    
   };
 
-  const confirmDelete  = (e) => {
-    e.stopPropagation()
+  const confirmDelete  = () => {
       const newContacts = contacts.filter(
         (contact) => !modal.ids.includes(contact.id)
       );
