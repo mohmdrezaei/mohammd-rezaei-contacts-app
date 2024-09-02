@@ -3,6 +3,7 @@ import ContactForm from "./contactForm/ContactForm.jsx";
 import ContactList from "./ContactList/ContactList.jsx";
 import Toast from "./toast/Toast.jsx";
 import Modal from "./modal/Modal.jsx";
+import ContactDetails from "./ContactList/ContactDetails.jsx";
 
 function Contacts(props) {
   const { currentPage, setCurrentPage, contacts, setContacts } = props;
@@ -21,11 +22,16 @@ function Contacts(props) {
     setToast({ show: true, message ,icon });
     setTimeout(() => setToast({ show: false, message: "" ,icon:"" }), 3000);
   };
-  const deleteHandler = (ids) => {
+  const deleteHandler = (e,ids) => {
+    if (ids) {
+      e.stopPropagation();
+    }
     setModal({ show: true, ids });
+    
   };
 
-  const confirmDelete  = () => {
+  const confirmDelete  = (e) => {
+    e.stopPropagation()
       const newContacts = contacts.filter(
         (contact) => !modal.ids.includes(contact.id)
       );
@@ -38,10 +44,21 @@ function Contacts(props) {
     setModal({ show: false, ids: [] });
   };
 
-  const editHandler = (contact) => {
+  const editHandler = (e,contact) => {
+    e.stopPropagation()
     setCurrentPage("contactForm");
     setContact({ ...contact, isEditing: true });
   };
+
+  const contactClickHandler = (contact) => {
+    setContact(contact)
+    setCurrentPage("contactDetails");
+};
+
+const routeHandler = () => {
+  setCurrentPage("contactList");
+  setContact({ isEditing: false });
+};
 
   return (
     <>
@@ -54,12 +71,12 @@ function Contacts(props) {
       <Toast message={toast.message} show={toast.show} icon={toast.icon} />
       {currentPage === "contactForm" && (
         <ContactForm
-          setCurrentPage={setCurrentPage}
           contact={contact}
           setContact={setContact}
           contacts={contacts}
           setContacts={setContacts}
           showToast={showToast}
+          routeHandler={routeHandler}
         />
       )}
       {currentPage === "contactList" && (
@@ -68,6 +85,13 @@ function Contacts(props) {
           deleteHandler={deleteHandler}
           editHandler={editHandler}
           showToast={showToast}
+          contactClickHandler={contactClickHandler}
+        />
+      )}
+      {currentPage === "contactDetails" && (
+        <ContactDetails
+          contact={contact}
+          routeHandler={routeHandler}
         />
       )}
     </>

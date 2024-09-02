@@ -3,7 +3,7 @@ import styles from "./ContactList.module.css";
 import ContactItem from "./ContactItem";
 
 
-function ContactList({ contacts, deleteHandler, editHandler ,showToast }) {
+function ContactList({ contacts, deleteHandler, editHandler ,showToast ,contactClickHandler }) {
   
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [selectedContacts , setSelectedContacts] = useState([])
@@ -13,7 +13,6 @@ function ContactList({ contacts, deleteHandler, editHandler ,showToast }) {
   };
   
   const contactSelectHandler = (id)=>{
-    
    setSelectedContacts((selected => 
     selected.includes(id)
     ?selected.filter(contactId => contactId !== id)
@@ -21,7 +20,7 @@ function ContactList({ contacts, deleteHandler, editHandler ,showToast }) {
    ))
   }
 
-  const deleteSelectedHandler = () => {
+  const deleteSelectedHandler = () => { 
     if(selectedContacts.length === 0){
       showToast("You must select at least one item!" , "./src/assets/warning.png")
       return;
@@ -53,12 +52,12 @@ function ContactList({ contacts, deleteHandler, editHandler ,showToast }) {
                 title="Group Delete"
                 className={styles.groupDelete}
                 src={"./src/assets/trash-bin.png"}
-                onClick={deleteSelectedHandler}
+                onClick={(e)=>deleteSelectedHandler(e)}
               />
               <button
               title="cancel"
               className={styles.close}
-              onClick={(e) => setShowCheckboxes(false)}
+              onClick={() => setShowCheckboxes(false)}
             >
               &#10006;
             </button>
@@ -82,6 +81,7 @@ function ContactList({ contacts, deleteHandler, editHandler ,showToast }) {
                 showCheckbox={showCheckboxes}
                 contactSelectHandler={contactSelectHandler}
                 isSelected={selectedContacts.includes(contact.id)}
+                contactClickHandler={contactClickHandler}
               />
             ))}
           </tbody>

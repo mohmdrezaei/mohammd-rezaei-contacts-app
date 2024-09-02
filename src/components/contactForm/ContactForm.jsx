@@ -5,12 +5,12 @@ import success from "/src/assets/check.png"
 
 function contactForm(props) {
   const {
-    setCurrentPage,
     contact,
     setContact,
     contacts,
     setContacts,
     showToast,
+    routeHandler
   } = props;
   const [errors, setErrors] = useState({
     name: "",
@@ -77,10 +77,6 @@ function contactForm(props) {
       });
       setCurrentPage("contactList");
     }
-  };
-  const routeHandler = () => {
-    setCurrentPage("contactList");
-    setContact({ isEditing: false });
   };
 
   return (
