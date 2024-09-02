@@ -75,7 +75,7 @@ function contactForm(props) {
         email: "",
         phone: "",
       });
-      setCurrentPage("contactList");
+      routeHandler()
     }
   };
 
