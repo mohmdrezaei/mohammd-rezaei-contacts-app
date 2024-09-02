@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./Header.module.css";
 
 function Header(props) {
-  const { currentPage, setCurrentPage, contacts, setFilteredContacts } = props;
+  const { setCurrentPage, contacts, setFilteredContacts } = props;
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (e) => {

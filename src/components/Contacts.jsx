@@ -52,7 +52,13 @@ function Contacts(props) {
 
 const routeHandler = () => {
   setCurrentPage("contactList");
-  setContact({ isEditing: false });
+     setContact({
+      id: "",
+    name: "",
+    email: "",
+    phone: "",
+    photo: "",
+     })
 };
 
   return (
