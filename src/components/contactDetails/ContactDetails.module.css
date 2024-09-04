@@ -66,3 +66,9 @@
     cursor: pointer;
     display: flex;
 }
+
+@media (max-width: 768px) {
+    .phone {
+        width: 90%;
+    }
+}
