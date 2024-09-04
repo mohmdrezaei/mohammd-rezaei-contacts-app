@@ -3,7 +3,7 @@ import ContactForm from "./contactForm/ContactForm.jsx";
 import ContactList from "./ContactList/ContactList.jsx";
 import Toast from "./toast/Toast.jsx";
 import Modal from "./modal/Modal.jsx";
-import ContactDetails from "./ContactList/ContactDetails.jsx";
+import ContactDetails from "./contactDetails/ContactDetails.jsx";
 
 function Contacts(props) {
   const { currentPage, setCurrentPage, contacts, setContacts,contact,setContact } = props;
