@@ -86,6 +86,7 @@ const routeHandler = () => {
         <ContactDetails
           contact={contact}
           routeHandler={routeHandler}
+          editHandler={editHandler}
         />
       )}
     </>

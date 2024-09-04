@@ -1,6 +1,5 @@
-
-import styles from "./ContactDetails.module.css"
-function ContactDetails({contact , routeHandler}) {
+import styles from "./ContactDetails.module.css";
+function ContactDetails({ contact, routeHandler, editHandler }) {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -17,14 +16,16 @@ function ContactDetails({contact , routeHandler}) {
           alt="user-profile"
         />
         <p>{contact.name}</p>
+        <button onClick={(e) => editHandler(e, contact)}>Edit</button>
+      
       </div>
 
       <div className={styles.phone}>
         <h4>Phone Number</h4>
         <p>{contact.phone}</p>
       </div>
-      </div>
-  )
+    </div>
+  );
 }
 
-export default ContactDetails
+export default ContactDetails;

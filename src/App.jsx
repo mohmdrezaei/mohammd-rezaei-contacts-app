@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import { useState } from "react";
 import Contacts from "./components/Contacts.jsx";
+import ContactList from "./components/ContactList/ContactList.jsx";
 function App() {
   const [currentPage, setCurrentPage] = useState("contactList");
   const [contacts, setContacts] = useState( JSON.parse(localStorage.getItem("contacts")) || []);
@@ -32,7 +33,9 @@ function App() {
         setContacts={updateContacts}
         contact={contact}
         setContact={setContact}
-      />
+      >
+        <ContactList></ContactList>
+        </Contacts>
     </>
   );
 }
