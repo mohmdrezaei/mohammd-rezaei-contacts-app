@@ -1,7 +1,7 @@
 import Header from "./components/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Contacts from "./components/Contacts.jsx";
-import ContactList from "./components/ContactList/ContactList.jsx";
+
 function App() {
   const [currentPage, setCurrentPage] = useState("contactList");
   const [contacts, setContacts] = useState( JSON.parse(localStorage.getItem("contacts")) || []);
@@ -14,10 +14,11 @@ function App() {
     photo: "",
     isEditing: false,
   });
-  const updateContacts = (newContacts) => {
-    setContacts(newContacts);
-    setFilteredContacts(newContacts);
-  };
+
+  useEffect(() => {
+    setFilteredContacts(contacts);
+  }, [contacts]);
+
   return (
     <>
       <Header
@@ -30,12 +31,10 @@ function App() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         contacts={filteredContacts}
-        setContacts={updateContacts}
+        setContacts={setContacts}
         contact={contact}
         setContact={setContact}
-      >
-        <ContactList></ContactList>
-        </Contacts>
+      />
     </>
   );
 }
