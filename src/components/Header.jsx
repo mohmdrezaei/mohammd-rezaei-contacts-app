@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./Header.module.css";
 
 function Header(props) {
-  const { setCurrentPage, contacts, setFilteredContacts } = props;
+  const { setCurrentPage, contacts, setFilteredContacts ,setContact} = props;
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (e) => {
@@ -19,7 +19,16 @@ function Header(props) {
     );
     setFilteredContacts(filtered);
   };
-
+  const routeHandler = () => {
+    setCurrentPage("contactForm");
+       setContact({
+        id: "",
+      name: "",
+      email: "",
+      phone: "",
+      photo: "",
+       })
+  };
 
   return (
     <div className={styles.container}>
@@ -40,7 +49,7 @@ function Header(props) {
 
       <div
         className={styles.addBtn}
-        onClick={() => setCurrentPage("contactForm")}
+        onClick={routeHandler}
       >
         <img src="./src/assets/add.png" alt="" />
         <p>Create contact</p>

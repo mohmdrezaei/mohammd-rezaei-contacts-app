@@ -6,17 +6,10 @@ import Modal from "./modal/Modal.jsx";
 import ContactDetails from "./ContactList/ContactDetails.jsx";
 
 function Contacts(props) {
-  const { currentPage, setCurrentPage, contacts, setContacts } = props;
+  const { currentPage, setCurrentPage, contacts, setContacts,contact,setContact } = props;
   const [toast, setToast] = useState({ show: false, message: "" ,icon:""});
   const [modal, setModal] = useState({ show: false, ids: [] });
-  const [contact, setContact] = useState({
-    id: "",
-    name: "",
-    email: "",
-    phone: "",
-    photo: "",
-    isEditing: false,
-  });
+  
 
   const showToast = (message , icon) => {
     setToast({ show: true, message ,icon });
