@@ -16,7 +16,11 @@ function Contacts(props) {
     setTimeout(() => setToast({ show: false, message: "" ,icon:"" }), 3000);
   };
   const deleteHandler = (ids) => {
-    setModal({ show: true, ids });
+    setModal({
+      show: true,
+      message: ids.length === 1 ? "Are you sure you want to delete this contact?" : `Are you sure you want to delete these ${ids.length} contacts?`,
+      ids
+    });
   };
 
   const confirmDelete  = () => {
@@ -25,7 +29,11 @@ function Contacts(props) {
       );
       setContacts(newContacts);
       localStorage.setItem("contacts", JSON.stringify(newContacts));
-      showToast("Contact deleted!", "./src/assets/check.png");
+      showToast(
+        modal.ids.length === 1 ? "Contact deleted!" : `${modal.ids.length} contacts deleted!`,
+        "./src/assets/check.png"
+      );
+  
       setModal({ show: false, ids: [] });
   };
   const closeModal = () => {
@@ -60,7 +68,7 @@ const routeHandler = () => {
         show={modal.show}
         onClose={closeModal}
         onConfirm={confirmDelete}
-        message="Are you sure you want to delete the contact?"
+        message={modal.message}
       />
       <Toast message={toast.message} show={toast.show} icon={toast.icon} />
       {currentPage === "contactForm" && (
