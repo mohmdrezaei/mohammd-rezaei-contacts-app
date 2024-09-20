@@ -1,15 +1,10 @@
 import React from "react";
 import styles from "./ContactList.module.css";
+import { useContact } from "../../context/ContactContext";
+
 function ContactItem(props) {
-  const {
-    data,
-    deleteHandler,
-    editHandler,
-    showCheckbox,
-    contactSelectHandler,
-    isSelected,
-    contactClickHandler,
-  } = props;
+  const { data, showCheckbox, contactSelectHandler, isSelected } = props;
+ const {deleteHandler ,editHandler , contactClickHandler} = useContact()
 
   const deleteContactHandler = (e) => {
     e.stopPropagation();

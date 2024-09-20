@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import styles from "./ContactList.module.css";
 import ContactItem from "./ContactItem";
+import { useContact } from "../../context/ContactContext";
 
 
-function ContactList({ contacts, deleteHandler, editHandler ,showToast ,contactClickHandler }) {
-  
+function ContactList() {
+  const {contacts , deleteHandler ,showToast} = useContact()
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [selectedContacts , setSelectedContacts] = useState([])
-
-  const toggleCheckboxes = () => {
-    setShowCheckboxes(!showCheckboxes);
-  };
   
   const contactSelectHandler = (id)=>{
    setSelectedContacts((selected => 
@@ -45,7 +42,7 @@ function ContactList({ contacts, deleteHandler, editHandler ,showToast ,contactC
                 title="Group Delete"
                 className={styles.groupDelete}
                 src={"./src/assets/more.png"}
-                onClick={toggleCheckboxes}
+                onClick={()=>setShowCheckboxes(!showCheckboxes)}
               />)
               :(
                 <><img
@@ -76,12 +73,9 @@ function ContactList({ contacts, deleteHandler, editHandler ,showToast ,contactC
               <ContactItem
                 key={contact.id}
                 data={contact}
-                deleteHandler={deleteHandler}
-                editHandler={editHandler}
                 showCheckbox={showCheckboxes}
                 contactSelectHandler={contactSelectHandler}
                 isSelected={selectedContacts.includes(contact.id)}
-                contactClickHandler={contactClickHandler}
               />
             ))}
           </tbody>

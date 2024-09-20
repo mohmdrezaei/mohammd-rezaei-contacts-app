@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from "./Header.module.css";
+import { useContact } from "../context/ContactContext";
 
-function Header(props) {
-  const { setCurrentPage, contacts, setFilteredContacts ,setContact} = props;
+function Header() {
+  const { setCurrentPage, contacts, setFilteredContacts ,setContact} = useContact();
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (e) => {

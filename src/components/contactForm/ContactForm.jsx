@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import styles from "./ContactForm.module.css";
 import { v4 } from "uuid";
-import success from "/src/assets/check.png"
+import success from "/src/assets/check.png";
+import { useContact } from "../../context/ContactContext";
 
-function contactForm(props) {
-  const {
-    contact,
-    setContact,
-    contacts,
-    setContacts,
-    showToast,
-    routeHandler
-  } = props;
+function contactForm() {
+  const { contact, setContact, contacts, setContacts ,showToast ,routeHandler } = useContact();
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -23,7 +17,7 @@ function contactForm(props) {
     setContact((contact) => ({
       ...contact,
       [name]: value,
-      photo: `https://ui-avatars.com/api/?name=${contact.name[0]}&length=1&background=random&size=262`
+      photo: `https://ui-avatars.com/api/?name=${contact.name[0]}&length=1&background=random&size=262`,
     }));
   };
 
@@ -56,10 +50,10 @@ function contactForm(props) {
         updatedContacts = contacts.map((c) =>
           c.id === contact.id ? newContact : c
         );
-        showToast("Contact Updated!" ,success );
+        showToast("Contact Updated!", success);
       } else {
         updatedContacts = [...contacts, newContact];
-        showToast("Contact added!" ,success );
+        showToast("Contact added!", success);
       }
       setContacts(updatedContacts);
       localStorage.setItem("contacts", JSON.stringify(updatedContacts));
@@ -74,7 +68,7 @@ function contactForm(props) {
         email: "",
         phone: "",
       });
-      routeHandler()
+      routeHandler();
     }
   };
 
@@ -115,8 +109,7 @@ function contactForm(props) {
             <span>{error && error}</span>
           </div>
         ))}
-        <button
-         onClick={addHandler}>
+        <button onClick={addHandler}>
           {contact.isEditing ? "Update" : "Create"}
         </button>
       </div>

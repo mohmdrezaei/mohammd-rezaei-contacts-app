@@ -1,5 +1,7 @@
+import { useContact } from "../../context/ContactContext";
 import styles from "./ContactDetails.module.css";
-function ContactDetails({ contact, routeHandler, editHandler }) {
+function ContactDetails() {
+  const {contact ,routeHandler, editHandler} = useContact()
   return (
     <div className={styles.container}>
       <div className={styles.title}>
