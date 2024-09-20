@@ -3,7 +3,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ContactContext = createContext();
 
 function ContactProvider({ children }) {
-  const [currentPage, setCurrentPage] = useState("contactList");
   const [contacts, setContacts] = useState(
     JSON.parse(localStorage.getItem("contacts")) || []
   );
@@ -71,21 +70,10 @@ function ContactProvider({ children }) {
     setCurrentPage("contactDetails");
   };
 
-  const routeHandler = () => {
-    setCurrentPage("contactList");
-    setContact({
-      id: "",
-      name: "",
-      email: "",
-      phone: "",
-      photo: "",
-    });
-  };
+  
   return (
     <ContactContext.Provider
       value={{
-        currentPage,
-        setCurrentPage,
         contacts,
         setContacts,
         filteredContacts,
@@ -101,7 +89,6 @@ function ContactProvider({ children }) {
         confirmDelete,
         editHandler,
         contactClickHandler,
-        routeHandler,
       }}
     >
       {children}

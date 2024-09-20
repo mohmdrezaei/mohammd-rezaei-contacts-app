@@ -5,7 +5,7 @@ import { useContact } from "../../context/ContactContext";
 
 
 function ContactList() {
-  const {contacts , deleteHandler ,showToast} = useContact()
+  const {filteredContacts , deleteHandler ,showToast} = useContact()
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [selectedContacts , setSelectedContacts] = useState([])
   
@@ -65,11 +65,11 @@ function ContactList() {
           </tr>
         </thead>
         <div className={styles.count}>
-          <p>Contacts ({contacts.length})</p>
+          <p>Contacts ({filteredContacts.length})</p>
         </div>
-        {contacts.length ? (
+        {filteredContacts.length ? (
           <tbody>
-            {contacts.map((contact) => (
+            {filteredContacts.map((contact) => (
               <ContactItem
                 key={contact.id}
                 data={contact}

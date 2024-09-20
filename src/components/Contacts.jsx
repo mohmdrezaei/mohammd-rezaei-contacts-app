@@ -5,28 +5,26 @@ import Toast from "./toast/Toast.jsx";
 import Modal from "./modal/Modal.jsx";
 import ContactDetails from "./contactDetails/ContactDetails.jsx";
 import { useContact } from "../context/ContactContext.jsx";
+import { Route, Routes } from "react-router-dom";
 
 function Contacts() {
-  const { currentPage, modal , confirmDelete , toast ,setModal  } = useContact();
- 
+  const { modal, confirmDelete, toast, setModal } = useContact();
+
   return (
     <>
-    <Modal
+      <Modal
         show={modal.show}
-        onClose={()=>setModal({ show: false, ids: [] })}
+        onClose={() => setModal({ show: false, ids: [] })}
         onConfirm={confirmDelete}
         message={modal.message}
       />
       <Toast message={toast.message} show={toast.show} icon={toast.icon} />
-      {currentPage === "contactForm" && (
-        <ContactForm/>
-      )}
-      {currentPage === "contactList" && (
-        <ContactList/>
-      )}
-      {currentPage === "contactDetails" && (
-        <ContactDetails/>
-      )}
+      <Routes>
+        <Route path="addContact" element={<ContactForm />} />
+        <Route path="/" element={<ContactList />} />
+      </Routes>
+      
+      
     </>
   );
 }

@@ -4,7 +4,9 @@
     align-items: center;
     flex-wrap: wrap;
 }
-
+a{
+    text-decoration: none;
+}
 .icon ,.addBtn{
     display: flex;
     align-items: center;

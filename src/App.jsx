@@ -7,7 +7,6 @@ import ContactProvider from "./context/ContactContext.jsx";
 
 function App() {
 
-
   return (
     <ContactProvider>
       <Header />

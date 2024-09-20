@@ -3,9 +3,10 @@ import styles from "./ContactForm.module.css";
 import { v4 } from "uuid";
 import success from "/src/assets/check.png";
 import { useContact } from "../../context/ContactContext";
+import { Link } from "react-router-dom";
 
 function contactForm() {
-  const { contact, setContact, contacts, setContacts ,showToast ,routeHandler } = useContact();
+  const { contact, setContact, contacts, setContacts ,showToast} = useContact();
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -68,14 +69,13 @@ function contactForm() {
         email: "",
         phone: "",
       });
-      routeHandler();
     }
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <img src="./src/assets/left-arrow.png" alt="" onClick={routeHandler} />
+       <Link to="/"> <img src="./src/assets/left-arrow.png" alt="back"  /></Link>
         <h1>Contact List</h1>
       </div>
       <div className={styles.profile}>

@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import styles from "./Header.module.css";
 import { useContact } from "../context/ContactContext";
+import { Link } from "react-router-dom";
 
 function Header() {
-  const { setCurrentPage, contacts, setFilteredContacts ,setContact} = useContact();
+  const { contacts, setFilteredContacts } = useContact();
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (e) => {
@@ -19,16 +20,6 @@ function Header() {
         contact.email.toLowerCase().includes(term.toLowerCase())
     );
     setFilteredContacts(filtered);
-  };
-  const routeHandler = () => {
-    setCurrentPage("contactForm");
-       setContact({
-        id: "",
-      name: "",
-      email: "",
-      phone: "",
-      photo: "",
-       })
   };
 
   return (
@@ -50,10 +41,11 @@ function Header() {
 
       <div
         className={styles.addBtn}
-        onClick={routeHandler}
+        
       >
+        
         <img src="./src/assets/add.png" alt="" />
-        <p>Create contact</p>
+        <Link to="addContact"> Create contact</Link>
       </div>
     </div>
   );
