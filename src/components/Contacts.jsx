@@ -6,6 +6,7 @@ import Modal from "./modal/Modal.jsx";
 import ContactDetails from "./contactDetails/ContactDetails.jsx";
 import { useContact } from "../context/ContactContext.jsx";
 import { Route, Routes } from "react-router-dom";
+import NotFoundPage from "./notFound/NotFoundPage.jsx";
 
 function Contacts() {
   const { modal, confirmDelete, toast, setModal } = useContact();
@@ -24,6 +25,7 @@ function Contacts() {
         <Route path="/" element={<ContactList />} />
         <Route path="contactDetails/:id" element={<ContactDetails />} />
         <Route path="contact/edit/:id" element={<ContactForm />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       
       
