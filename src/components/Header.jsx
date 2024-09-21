@@ -3,6 +3,10 @@ import styles from "./Header.module.css";
 import { useContact } from "../context/ContactContext";
 import { Link } from "react-router-dom";
 
+import logo from "../assets/logo.png"
+import search from "../assets/search.png"
+import add from "../assets/add.png"
+
 function Header() {
   const { contacts, setFilteredContacts } = useContact();
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,11 +29,11 @@ function Header() {
   return (
     <div className={styles.container}>
       <div className={styles.icon}>
-        <img src="./src/assets/logo.png" alt="" />
+        <img src={logo} alt="" />
         <p>Contact App</p>
       </div>
       <div className={styles.search}>
-        <img src="./src/assets/search.png" alt="" />
+        <img src={search} alt="" />
         <input
           type="text"
           placeholder="Search"
@@ -44,7 +48,7 @@ function Header() {
         
       >
         
-        <img src="./src/assets/add.png" alt="" />
+        <img src={add}alt="" />
         <Link to="addContact"> Create contact</Link>
       </div>
     </div>

@@ -65,10 +65,7 @@ function ContactProvider({ children }) {
     setContact({ ...contact, isEditing: true });
   };
 
-  const contactClickHandler = (contact) => {
-    setContact(contact);
-    setCurrentPage("contactDetails");
-  };
+
 
   
   return (
@@ -88,7 +85,6 @@ function ContactProvider({ children }) {
         deleteHandler,
         confirmDelete,
         editHandler,
-        contactClickHandler,
       }}
     >
       {children}

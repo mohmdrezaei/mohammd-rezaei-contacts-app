@@ -1,11 +1,17 @@
+import { Link, useParams } from "react-router-dom";
 import { useContact } from "../../context/ContactContext";
 import styles from "./ContactDetails.module.css";
+import leftArrow from "../../assets/left-arrow.png";
+
 function ContactDetails() {
-  const {contact ,routeHandler, editHandler} = useContact()
+  const { id } = useParams();
+  const {contacts , editHandler} = useContact()
+
+  const contact = contacts.find(c => c.id === id);
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <img src="./src/assets/left-arrow.png" onClick={routeHandler} />
+      <Link to="/"> <img src={leftArrow} alt="back"  /></Link>
         <h1>Contact List</h1>
       </div>
       <div className={styles.profile}>

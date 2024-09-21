@@ -22,6 +22,7 @@ function Contacts() {
       <Routes>
         <Route path="addContact" element={<ContactForm />} />
         <Route path="/" element={<ContactList />} />
+        <Route path="contactDetails/:id" element={<ContactDetails />} />
       </Routes>
       
       
