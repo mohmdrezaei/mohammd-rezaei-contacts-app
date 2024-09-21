@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./ContactList.module.css";
 import { useContact } from "../../context/ContactContext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 function ContactItem(props) {
+  const navigate = useNavigate()
   const { data, showCheckbox, contactSelectHandler, isSelected } = props;
  const {deleteHandler ,editHandler } = useContact()
 
@@ -12,13 +14,13 @@ function ContactItem(props) {
     deleteHandler(data.id);
   };
   return (
- <tr  >
-      <Link to={`contactDetails/${data.id}`}>
+ <tr  onClick={()=> navigate(`contactDetails/${data.id}`)}>
+    
         <td className={styles.profile}>
           <img src={data.photo} alt="" />
           {data.name}
         </td>
-        </Link>
+        
         <td>{data.email}</td>
         <td>{data.phone}</td>
         <td className={styles.opration}>
