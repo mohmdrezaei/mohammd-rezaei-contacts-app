@@ -1,14 +1,15 @@
 import { useContext, useState } from "react";
 import styles from "./Header.module.css";
 import { useContact } from "../context/ContactContext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import logo from "../assets/logo.png"
 import search from "../assets/search.png"
 import add from "../assets/add.png"
 
 function Header() {
-  const { contacts, setFilteredContacts } = useContact();
+  const navigate = useNavigate()
+  const { contacts, setFilteredContacts ,setContact} = useContact();
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (e) => {
@@ -25,6 +26,15 @@ function Header() {
     );
     setFilteredContacts(filtered);
   };
+  const addBtnHandler =()=>{
+    navigate("addContact")
+    setContact({
+      name: "",
+      email: "",
+      phone: "",
+      photo: "",
+    }); 
+  }
 
   return (
     <div className={styles.container}>
@@ -45,11 +55,11 @@ function Header() {
 
       <div
         className={styles.addBtn}
-        
+        onClick={addBtnHandler}
       >
         
         <img src={add}alt="" />
-        <Link to="addContact"> Create contact</Link>
+        <a> Create contact</a>
       </div>
     </div>
   );

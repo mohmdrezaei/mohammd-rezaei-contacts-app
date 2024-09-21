@@ -3,10 +3,17 @@ import styles from "./ContactForm.module.css";
 import { v4 } from "uuid";
 import success from "/src/assets/check.png";
 import { useContact } from "../../context/ContactContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import leftArrow from "../../assets/left-arrow.png";
+import userIcon from "../../assets/name.png";
+import emailIcon from "../../assets/email.png";
+import phoneIcon from "../../assets/phone.png";
 
 function contactForm() {
-  const { contact, setContact, contacts, setContacts ,showToast} = useContact();
+  const navigate = useNavigate();
+  const { contact, setContact, contacts, setContacts, showToast } =
+    useContact();
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -69,13 +76,25 @@ function contactForm() {
         email: "",
         phone: "",
       });
+      navigate("/");
     }
+  };
+
+  const backBtnHandler = () => {
+    navigate("/")
+    setContact({
+      name: "",
+      email: "",
+      phone: "",
+      photo: "",
+    }); 
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-       <Link to="/"> <img src="./src/assets/left-arrow.png" alt="back"  /></Link>
+          <img src={leftArrow} alt="back" onClick={backBtnHandler} />
+        
         <h1>Contact List</h1>
       </div>
       <div className={styles.profile}>
@@ -92,7 +111,16 @@ function contactForm() {
       <div className={styles.form}>
         {Object.entries(errors).map(([field, error]) => (
           <div key={field} className={styles.inputGroups}>
-            <img src={`./src/assets/${field}.png`} alt="" />
+            <img
+              src={
+                field === "email"
+                  ? emailIcon
+                  : field === "phone"
+                  ? phoneIcon
+                  : userIcon
+              }
+              alt=""
+            />
             <input
               type={
                 field === "email"

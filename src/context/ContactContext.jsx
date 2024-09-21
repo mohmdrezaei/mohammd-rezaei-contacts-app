@@ -1,8 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ContactContext = createContext();
 
 function ContactProvider({ children }) {
+  const navigate = useNavigate()
   const [contacts, setContacts] = useState(
     JSON.parse(localStorage.getItem("contacts")) || []
   );
@@ -61,7 +63,7 @@ function ContactProvider({ children }) {
 
   const editHandler = (e, contact) => {
     e.stopPropagation();
-    setCurrentPage("contactForm");
+    navigate(`contact/edit/${contact.id}`)
     setContact({ ...contact, isEditing: true });
   };
 

@@ -65,7 +65,7 @@ function ContactList() {
           </tr>
         </thead>
         <div className={styles.count}>
-          <p>Contacts ({filteredContacts.length})</p>
+          <a>Contacts ({filteredContacts.length})</a>
         </div>
         {filteredContacts.length ? (
           <tbody>
