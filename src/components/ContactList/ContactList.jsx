@@ -30,7 +30,7 @@ function ContactList() {
   return (
     <div className={styles.container}>
       <table>
-        <thead>
+        <thead className={styles.thead}>
           <tr>
             <th>Name</th>
             <th>email</th>
@@ -64,9 +64,15 @@ function ContactList() {
             </th>
           </tr>
         </thead>
-        <div className={styles.count}>
-          <a>Contacts ({filteredContacts.length})</a>
-        </div>
+        
+        <thead className={styles.count}>
+          <tr>
+            <td colSpan="4" >
+              Contacts ({filteredContacts.length})
+            </td>
+          </tr>
+        </thead>
+       
         {filteredContacts.length ? (
           <tbody>
             {filteredContacts.map((contact) => (

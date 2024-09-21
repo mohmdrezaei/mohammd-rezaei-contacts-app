@@ -9,12 +9,14 @@
     margin-top: 20px;
 }
 
-.container table thead {
+
+.thead {
     position: sticky;
     top: 0;
     z-index: 10;
     border-bottom: 1px solid #ccc;
 }
+
 
 .container table th {
     width: 25%;
@@ -25,16 +27,16 @@
     background-color: #fff;
 }
 
-.count {
-    margin: 20px 0;
-}
-
-.count p {
+.count { 
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 500;
     opacity: 0.56;
     padding: 0 16px;
+}
+
+.count td {
+   padding: 10px
 }
 
 .container table tbody td {
