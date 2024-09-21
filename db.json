@@ -1,28 +1,12 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "name": "Juliet Oma",
-        "email": "julie@yahoo.com",
-        "number": "08100000000"
-      },
-      {
-        "id": 2,
-        "name": "James Williams",
-        "email": "jameswilly@gmail.com",
-        "number": "08111111111"
-      },
-      {
-        "id": 3,
-        "name": "Ahmed Ali",
-        "email": "ahmedali012@gmail.com",
-        "number": "09022222222"
-      },
-      {
-        "id": 4,
-        "name": "Grace Funsho",
-        "email": "gracefunsho@gmail.com",
-        "number": "09033333333"
-      }
-    ]
-  }
+  "contacts": [
+    {
+      "id": "316fcfc9-1372-45ca-b676-b71a90c15e8e",
+      "name": "Leanne Graham",
+      "email": "ahad@yahoo.com",
+      "phone": "09194426923",
+      "photo": "https://ui-avatars.com/api/?name=L&length=1&background=random&size=262",
+      "isEditing": false
+    }
+  ]
+}

@@ -1,13 +1,12 @@
+import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ContactContext = createContext();
 
 function ContactProvider({ children }) {
-  const navigate = useNavigate()
-  const [contacts, setContacts] = useState(
-    JSON.parse(localStorage.getItem("contacts")) || []
-  );
+  const navigate = useNavigate();
+  const [contacts, setContacts] = useState([]);
   const [filteredContacts, setFilteredContacts] = useState(contacts);
   const [contact, setContact] = useState({
     id: "",
@@ -19,6 +18,12 @@ function ContactProvider({ children }) {
   });
   const [toast, setToast] = useState({ show: false, message: "", icon: "" });
   const [modal, setModal] = useState({ show: false, ids: [] });
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3010/contacts")
+      .then((res) => setContacts(res.data));
+  }, []);
 
   useEffect(() => {
     setFilteredContacts(contacts);
@@ -60,16 +65,12 @@ function ContactProvider({ children }) {
     setModal({ show: false, ids: [] });
   };
 
-
   const editHandler = (e, contact) => {
     e.stopPropagation();
-    navigate(`contact/edit/${contact.id}`)
+    navigate(`contact/edit/${contact.id}`);
     setContact({ ...contact, isEditing: true });
   };
 
-
-
-  
   return (
     <ContactContext.Provider
       value={{
@@ -95,8 +96,8 @@ function ContactProvider({ children }) {
 }
 
 const useContact = () => {
-  const contact =useContext(ContactContext);
-  return contact
+  const contact = useContext(ContactContext);
+  return contact;
 };
 
 export default ContactProvider;

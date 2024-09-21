@@ -86,7 +86,11 @@ function ContactList() {
             ))}
           </tbody>
         ) : (
-          <p> No Contacts Yet!</p>
+         <tfoot>
+          <tr>
+            <td>No Contacts Yet!</td>
+          </tr>
+         </tfoot>
         )}
       </table>
     </div>
