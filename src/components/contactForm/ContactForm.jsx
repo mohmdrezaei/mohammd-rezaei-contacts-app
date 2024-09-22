@@ -9,6 +9,7 @@ import leftArrow from "../../assets/left-arrow.png";
 import userIcon from "../../assets/name.png";
 import emailIcon from "../../assets/email.png";
 import phoneIcon from "../../assets/phone.png";
+import axios from "axios";
 
 function contactForm() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function contactForm() {
 
   const validatePhone = (phone) => phone.length >= 10;
 
-  const addHandler = () => {
+  const addHandler = async () => {
     const newErrors = {
       name: !contact.name ? "Name is required." : "",
       email:
@@ -50,51 +51,55 @@ function contactForm() {
           : "",
     };
     setErrors(newErrors);
+    try {
+      if (Object.values(newErrors).every((error) => error === "")) {
+        const newContact = { ...contact, id: v4() };
 
-    if (Object.values(newErrors).every((error) => error === "")) {
-      const newContact = { ...contact, id: v4() };
-      let updatedContacts;
-      if (contact.isEditing) {
-        updatedContacts = contacts.map((c) =>
-          c.id === contact.id ? newContact : c
-        );
-        showToast("Contact Updated!", success);
-      } else {
-        updatedContacts = [...contacts, newContact];
-        showToast("Contact added!", success);
+        if (contact.isEditing) {
+          await axios.put(
+            `http://localhost:3010/contacts/${contact.id}`,
+            newContact
+          );
+          showToast("Contact Updated!", success);
+        } else {
+          await axios.post("http://localhost:3010/contacts", newContact);
+          showToast("Contact added!", success);
+        }
+        const res = await axios.get("http://localhost:3010/contacts");
+        setContacts(res.data);
+        setContact({
+          name: "",
+          email: "",
+          phone: "",
+          photo: "",
+        });
+        setErrors({
+          name: "",
+          email: "",
+          phone: "",
+        });
+        navigate("/");
       }
-      setContacts(updatedContacts);
-      localStorage.setItem("contacts", JSON.stringify(updatedContacts));
-      setContact({
-        name: "",
-        email: "",
-        phone: "",
-        photo: "",
-      });
-      setErrors({
-        name: "",
-        email: "",
-        phone: "",
-      });
-      navigate("/");
+    } catch (error) {
+      console.error("Error saving contact:", error);
     }
   };
 
   const backBtnHandler = () => {
-    navigate("/")
+    navigate("/");
     setContact({
       name: "",
       email: "",
       phone: "",
       photo: "",
-    }); 
+    });
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-          <img src={leftArrow} alt="back" onClick={backBtnHandler} />
-        
+        <img src={leftArrow} alt="back" onClick={backBtnHandler} />
+
         <h1>Contact List</h1>
       </div>
       <div className={styles.profile}>
