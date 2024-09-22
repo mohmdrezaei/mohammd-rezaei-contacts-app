@@ -3,7 +3,7 @@ import styles from "./ContactForm.module.css";
 import { v4 } from "uuid";
 import success from "/src/assets/check.png";
 import { useContact } from "../../context/ContactContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import leftArrow from "../../assets/left-arrow.png";
 import userIcon from "../../assets/name.png";
@@ -13,8 +13,7 @@ import axios from "axios";
 
 function contactForm() {
   const navigate = useNavigate();
-  const { contact, setContact, contacts, setContacts, showToast } =
-    useContact();
+  const { contact, setContact, setContacts, showToast } = useContact();
   const [errors, setErrors] = useState({
     name: "",
     email: "",
