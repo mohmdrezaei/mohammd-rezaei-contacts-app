@@ -38,11 +38,11 @@ function Header() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.icon}>
+      <div className={styles.icon} onClick={()=>navigate("/")}>
         <img src={logo} alt="" />
         <p>Contact App</p>
       </div>
-      <div className={styles.search}>
+      <div className={styles.search} >
         <img src={search} alt="" />
         <input
           type="text"

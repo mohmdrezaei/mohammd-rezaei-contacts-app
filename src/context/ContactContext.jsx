@@ -22,7 +22,8 @@ function ContactProvider({ children }) {
   useEffect(() => {
     axios
       .get("http://localhost:3010/contacts")
-      .then((res) => setContacts(res.data));
+      .then((res) => setContacts(res.data))
+      .catch((err) => console.error("Error fetching contacts:", err));
   }, []);
 
   useEffect(() => {
@@ -54,7 +55,6 @@ function ContactProvider({ children }) {
       (contact) => !modal.ids.includes(contact.id)
     );
     setContacts(newContacts);
-    localStorage.setItem("contacts", JSON.stringify(newContacts));
     showToast(
       !Array.isArray(modal.ids)
         ? "Contact deleted!"

@@ -13,6 +13,7 @@
 .icon{
     font-size: 20px;
     color: #5f6368;
+    cursor: pointer;
 }
 .icon img{
     width: 40px;
