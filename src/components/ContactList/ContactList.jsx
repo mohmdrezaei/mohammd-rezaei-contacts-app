@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import styles from "./ContactList.module.css";
 import ContactItem from "./ContactItem";
-import { useContact } from "../../context/ContactContext";
+import { useDispatch ,useSelector } from "react-redux";
+import { setToast ,deleteContacts} from "../../actions/actions";
+
+import warning from "../../assets/warning.png";
+
 
 
 function ContactList() {
-  const {filteredContacts , deleteHandler ,showToast} = useContact()
+  const dispatch = useDispatch()
+  const filteredContacts = useSelector((state) => state.contact.filteredContacts)
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [selectedContacts , setSelectedContacts] = useState([])
   
@@ -19,10 +24,13 @@ function ContactList() {
 
   const deleteSelectedHandler = () => { 
     if(selectedContacts.length === 0){
-      showToast("You must select at least one item!" , "./src/assets/warning.png")
+      dispatch(setToast({ show: true, message: "You must select at least one item!", icon: warning }));
+      setTimeout(() => {
+        dispatch(setToast({ show: false, message: "", icon: "" }));
+      }, 3000);
       return;
     }
-    deleteHandler(selectedContacts);
+    dispatch(deleteContacts(selectedContacts));
     setSelectedContacts([]);
     setShowCheckboxes(false)
   };

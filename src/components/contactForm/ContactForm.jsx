@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import styles from "./ContactForm.module.css";
 import { v4 } from "uuid";
 import success from "/src/assets/check.png";
-import { useContact } from "../../context/ContactContext";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { setContacts, setContact, setToast } from '../../actions/actions';
 
 import leftArrow from "../../assets/left-arrow.png";
 import userIcon from "../../assets/name.png";
@@ -13,7 +14,8 @@ import axios from "axios";
 
 function contactForm() {
   const navigate = useNavigate();
-  const { contact, setContact, setContacts, showToast } = useContact();
+  const dispatch = useDispatch();
+  const contact = useSelector((state) => state.contact.contact)
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -22,11 +24,11 @@ function contactForm() {
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
-    setContact((contact) => ({
+    dispatch(setContact(({
       ...contact,
       [name]: value,
       photo: `https://ui-avatars.com/api/?name=${contact.name[0]}&length=1&background=random&size=262`,
-    }));
+    })));
   };
 
   const validateEmail = (email) => {
@@ -59,25 +61,29 @@ function contactForm() {
             `http://localhost:3010/contacts/${contact.id}`,
             newContact
           );
-          showToast("Contact Updated!", success);
+          dispatch(setToast({ show: true, message: "Contact Updated!", icon: success }));
         } else {
           await axios.post("http://localhost:3010/contacts", newContact);
-          showToast("Contact added!", success);
+          dispatch(setToast({ show: true, message: "Contact added!", icon: success }));
         }
         const res = await axios.get("http://localhost:3010/contacts");
-        setContacts(res.data);
-        setContact({
+        dispatch(setContacts(res.data));
+        dispatch(setContact({
           name: "",
           email: "",
           phone: "",
           photo: "",
-        });
+        }));
         setErrors({
           name: "",
           email: "",
           phone: "",
         });
         navigate("/");
+        setTimeout(() => {
+          dispatch(setToast({ show: false, message: "", icon: "" }));
+        }, 3000);
+        return;
       }
     } catch (error) {
       console.error("Error saving contact:", error);
@@ -86,12 +92,12 @@ function contactForm() {
 
   const backBtnHandler = () => {
     navigate("/");
-    setContact({
+    dispatch(setContact({
       name: "",
       email: "",
       phone: "",
       photo: "",
-    });
+    }));
   };
 
   return (

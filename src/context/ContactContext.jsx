@@ -1,52 +1,58 @@
 import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createContext, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+import {
+  setContacts,
+  setFilteredContacts,
+  setContact,
+  setToast,
+  setModal,
+} from "../actions/actions";
 
 const ContactContext = createContext();
 
 function ContactProvider({ children }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [contacts, setContacts] = useState([]);
-  const [filteredContacts, setFilteredContacts] = useState(contacts);
-  const [contact, setContact] = useState({
-    id: "",
-    name: "",
-    email: "",
-    phone: "",
-    photo: "",
-    isEditing: false,
-  });
-  const [toast, setToast] = useState({ show: false, message: "", icon: "" });
-  const [modal, setModal] = useState({ show: false, ids: [] });
+  const contacts = useSelector((state) => state.contact.contacts);
+  const modal = useSelector((state) => state.contact.modal);
 
   useEffect(() => {
     axios
       .get("http://localhost:3010/contacts")
-      .then((res) => setContacts(res.data))
+      .then((res) => dispatch(setContacts(res.data)))
       .catch((err) => console.error("Error fetching contacts:", err));
   }, []);
 
   useEffect(() => {
-    setFilteredContacts(contacts);
+    dispatch(setFilteredContacts(contacts));
   }, [contacts]);
 
   const showToast = (message, icon) => {
-    setToast({ show: true, message, icon });
-    setTimeout(() => setToast({ show: false, message: "", icon: "" }), 3000);
+    dispatch(setToast({ show: true, message, icon }));
+    setTimeout(() =>
+      dispatch(setToast({ show: false, message: "", icon: "" }), 3000)
+    );
   };
   const deleteHandler = (ids) => {
     if (Array.isArray(ids) && ids.length > 1) {
-      setModal({
-        show: true,
-        message: `Are you sure you want to delete these ${ids.length} contacts?`,
-        ids,
-      });
+      dispatch(
+        setModal({
+          show: true,
+          message: `Are you sure you want to delete these ${ids.length} contacts?`,
+          ids,
+        })
+      );
     } else {
-      setModal({
-        show: true,
-        message: "Are you sure you want to delete this contact?",
-        ids,
-      });
+      dispatch(
+        setModal({
+          show: true,
+          message: "Are you sure you want to delete this contact?",
+          ids,
+        })
+      );
     }
   };
 
@@ -54,7 +60,7 @@ function ContactProvider({ children }) {
     const newContacts = contacts.filter(
       (contact) => !modal.ids.includes(contact.id)
     );
-    setContacts(newContacts);
+    dispatch(setContacts(newContacts));
     showToast(
       !Array.isArray(modal.ids)
         ? "Contact deleted!"
@@ -62,33 +68,18 @@ function ContactProvider({ children }) {
       "./src/assets/check.png"
     );
 
-    setModal({ show: false, ids: [] });
+    dispatch(setModal({ show: false, ids: [] }));
   };
 
   const editHandler = (e, contact) => {
     e.stopPropagation();
     navigate(`contact/edit/${contact.id}`);
-    setContact({ ...contact, isEditing: true });
+    dispatch(setContact({ ...contact, isEditing: true }));
   };
 
   return (
     <ContactContext.Provider
-      value={{
-        contacts,
-        setContacts,
-        filteredContacts,
-        setFilteredContacts,
-        contact,
-        setContact,
-        toast,
-        setToast,
-        modal,
-        setModal,
-        showToast,
-        deleteHandler,
-        confirmDelete,
-        editHandler,
-      }}
+      value={{ confirmDelete, deleteHandler, showToast, editHandler }}
     >
       {children}
     </ContactContext.Provider>
