@@ -71,7 +71,7 @@
         z-index: 15;
         border-radius: 50%;
     }
-    .addBtn p{
+    .addBtn a{
         display: none;
     }
     
