@@ -50,18 +50,27 @@ function ContactProvider({ children }) {
     }
   };
 
-  const confirmDelete = () => {
-    const newContacts = contacts.filter(
+  const confirmDelete = async() => {
+    let deletePromises;
+    if (Array.isArray(modal.ids)) {
+      deletePromises = modal.ids.map(async (id) => {
+        await axios.delete(`http://localhost:3010/contacts/${id}`);
+      });
+    } else {
+      deletePromises = [axios.delete(`http://localhost:3010/contacts/${modal.ids}`)];
+    }
+    await axios.all(deletePromises);
+     const newContacts = contacts.filter(
       (contact) => !modal.ids.includes(contact.id)
     );
-    setContacts(newContacts);
+    setContacts(newContacts );
+    
     showToast(
       !Array.isArray(modal.ids)
         ? "Contact deleted!"
         : `${modal.ids.length} contacts deleted!`,
       "./src/assets/check.png"
     );
-
     setModal({ show: false, ids: [] });
   };
 
