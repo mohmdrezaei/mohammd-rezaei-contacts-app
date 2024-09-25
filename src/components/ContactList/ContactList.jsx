@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import styles from "./ContactList.module.css";
 import ContactItem from "./ContactItem";
 import { useDispatch ,useSelector } from "react-redux";
-import { setToast ,deleteContacts} from "../../actions/actions";
+import { setToast } from "../../actions/actions";
 
 import warning from "../../assets/warning.png";
+import { useContact } from "../../context/ContactContext";
 
 
 
@@ -13,6 +14,7 @@ function ContactList() {
   const filteredContacts = useSelector((state) => state.contact.filteredContacts)
   const [showCheckboxes, setShowCheckboxes] = useState(false);
   const [selectedContacts , setSelectedContacts] = useState([])
+  const {deleteHandler} = useContact()
   
   const contactSelectHandler = (id)=>{
    setSelectedContacts((selected => 
@@ -30,7 +32,7 @@ function ContactList() {
       }, 3000);
       return;
     }
-    dispatch(deleteContacts(selectedContacts));
+    deleteHandler(selectedContacts);
     setSelectedContacts([]);
     setShowCheckboxes(false)
   };

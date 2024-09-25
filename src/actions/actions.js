@@ -3,7 +3,6 @@ export const SET_FILTERED_CONTACTS = "SET_FILTERED_CONTACTS";
 export const SET_CONTACT = "SET_CONTACT";
 export const SET_TOAST = "SET_TOAST";
 export const SET_MODAL = "SET_MODAL";
-export const DELETE_CONTACTS = 'DELETE_CONTACTS';
 export const CONFIRM_DELETE = 'CONFIRM_DELETE';
 
 export const setContacts = (contacts) => ({
@@ -30,11 +29,6 @@ export const setModal = (modal) => ({
   type: SET_MODAL,
   payload: modal,
 });
-
-export const deleteContacts = (ids) => ({
-    type: DELETE_CONTACTS,
-    payload: ids,
-  });
   
   export const confirmDelete = () => ({
     type: CONFIRM_DELETE,

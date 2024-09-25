@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { setModal, confirmDelete } from '../actions/actions.js';
+import { useSelector, useDispatch } from "react-redux";
+import { setModal, setContacts, setToast } from "../actions/actions.js";
 import ContactForm from "./contactForm/ContactForm.jsx";
 import ContactList from "./ContactList/ContactList.jsx";
 import Toast from "./toast/Toast.jsx";
@@ -8,14 +8,33 @@ import ContactDetails from "./contactDetails/ContactDetails.jsx";
 
 import { Route, Routes } from "react-router-dom";
 import NotFoundPage from "./notFound/NotFoundPage.jsx";
+import { useContact } from "../context/ContactContext.jsx";
 
 function Contacts() {
   const dispatch = useDispatch();
+
+ const {showToast} =useContact()
   const modal = useSelector((state) => state.contact.modal);
+  const contacts = useSelector((state) => state.contact.contacts);
   const toast = useSelector((state) => state.contact.toast);
 
-  const handleConfirmDelete = () => {
-    dispatch(confirmDelete());
+  // const handleConfirmDelete = () => {
+  //   dispatch(confirmDelete());
+  // };
+  const confirmDelete = () => {
+    const newContacts = contacts.filter(
+      (contact) => !modal.ids.includes(contact.id)
+    );
+    dispatch(setContacts(newContacts));
+    showToast(
+      !Array.isArray(modal.ids)
+        ? "Contact deleted!"
+        : `${modal.ids.length} contacts deleted!`,
+      "./src/assets/check.png"
+    );
+   
+
+    dispatch(setModal({ show: false, ids: [] }));
   };
 
   const handleCloseModal = () => {
@@ -27,7 +46,7 @@ function Contacts() {
       <Modal
         show={modal.show}
         onClose={handleCloseModal}
-        onConfirm={handleConfirmDelete}
+        onConfirm={confirmDelete}
         message={modal.message}
       />
       <Toast message={toast.message} show={toast.show} icon={toast.icon} />
@@ -38,8 +57,6 @@ function Contacts() {
         <Route path="contact/edit/:id" element={<ContactForm />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      
-      
     </>
   );
 }

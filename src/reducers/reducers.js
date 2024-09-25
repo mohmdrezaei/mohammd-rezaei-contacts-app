@@ -5,7 +5,6 @@ import {
   SET_CONTACT,
   SET_TOAST,
   SET_MODAL,
-  DELETE_CONTACTS,
   CONFIRM_DELETE,
 } from "../actions/actions";
 
@@ -36,15 +35,6 @@ const contactReducer = (state = initialState, action) => {
       return { ...state, toast: action.payload };
     case SET_MODAL:
       return { ...state, modal: action.payload };
-    case DELETE_CONTACTS:
-      return {
-        ...state,
-        modal: {
-          show: true,
-          message: `Are you sure you want to delete these ${action.payload.length} contacts?`,
-          ids: action.payload,
-        },
-      };
     case CONFIRM_DELETE:
       const newContacts = state.contacts.filter(
         (contact) => !state.modal.ids.includes(contact.id)
@@ -56,7 +46,9 @@ const contactReducer = (state = initialState, action) => {
         modal: { show: false, ids: [] },
         toast: {
           show: true,
-          message: `${state.modal.ids.length} contacts deleted!`,
+          message: Array.isArray(state.modal.ids)
+          ? `${state.modal.ids.length} contacts deleted!`
+          : ' contact deleted.',
           icon: "./src/assets/check.png",
         },
       };

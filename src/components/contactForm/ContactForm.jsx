@@ -1,20 +1,22 @@
+import axios from "axios";
 import React, { useState } from "react";
-import styles from "./ContactForm.module.css";
-import { v4 } from "uuid";
-import success from "/src/assets/check.png";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { setContacts, setContact, setToast } from '../../actions/actions';
+import { setContacts, setContact } from '../../actions/actions';
+import { useContact } from "../../context/ContactContext";
+import { v4 } from "uuid";
+import styles from "./ContactForm.module.css";
 
+import success from "/src/assets/check.png";
 import leftArrow from "../../assets/left-arrow.png";
 import userIcon from "../../assets/name.png";
 import emailIcon from "../../assets/email.png";
 import phoneIcon from "../../assets/phone.png";
-import axios from "axios";
 
 function contactForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {showToast} = useContact()
   const contact = useSelector((state) => state.contact.contact)
   const [errors, setErrors] = useState({
     name: "",
@@ -61,10 +63,10 @@ function contactForm() {
             `http://localhost:3010/contacts/${contact.id}`,
             newContact
           );
-          dispatch(setToast({ show: true, message: "Contact Updated!", icon: success }));
+          showToast("Contact Updated!", success);
         } else {
           await axios.post("http://localhost:3010/contacts", newContact);
-          dispatch(setToast({ show: true, message: "Contact added!", icon: success }));
+          showToast("Contact added!", success);
         }
         const res = await axios.get("http://localhost:3010/contacts");
         dispatch(setContacts(res.data));
@@ -80,9 +82,6 @@ function contactForm() {
           phone: "",
         });
         navigate("/");
-        setTimeout(() => {
-          dispatch(setToast({ show: false, message: "", icon: "" }));
-        }, 3000);
         return;
       }
     } catch (error) {

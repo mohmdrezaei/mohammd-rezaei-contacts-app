@@ -17,7 +17,6 @@ function ContactProvider({ children }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const contacts = useSelector((state) => state.contact.contacts);
-  const modal = useSelector((state) => state.contact.modal);
 
   useEffect(() => {
     axios
@@ -32,9 +31,9 @@ function ContactProvider({ children }) {
 
   const showToast = (message, icon) => {
     dispatch(setToast({ show: true, message, icon }));
-    setTimeout(() =>
-      dispatch(setToast({ show: false, message: "", icon: "" }), 3000)
-    );
+    setTimeout(() => {
+      dispatch(setToast({ show: false, message: "", icon: "" }));
+    }, 3000); 
   };
   const deleteHandler = (ids) => {
     if (Array.isArray(ids) && ids.length > 1) {
@@ -56,21 +55,6 @@ function ContactProvider({ children }) {
     }
   };
 
-  const confirmDelete = () => {
-    const newContacts = contacts.filter(
-      (contact) => !modal.ids.includes(contact.id)
-    );
-    dispatch(setContacts(newContacts));
-    showToast(
-      !Array.isArray(modal.ids)
-        ? "Contact deleted!"
-        : `${modal.ids.length} contacts deleted!`,
-      "./src/assets/check.png"
-    );
-
-    dispatch(setModal({ show: false, ids: [] }));
-  };
-
   const editHandler = (e, contact) => {
     e.stopPropagation();
     navigate(`contact/edit/${contact.id}`);
@@ -79,7 +63,7 @@ function ContactProvider({ children }) {
 
   return (
     <ContactContext.Provider
-      value={{ confirmDelete, deleteHandler, showToast, editHandler }}
+      value={{ deleteHandler, showToast, editHandler }}
     >
       {children}
     </ContactContext.Provider>

@@ -2,15 +2,12 @@ import React from "react";
 import styles from "./ContactList.module.css";
 
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import {deleteContacts} from "../../actions/actions";
 import { useContact } from "../../context/ContactContext";
 
 function ContactItem(props) {
   const navigate = useNavigate();
   const { data, showCheckbox, contactSelectHandler, isSelected } = props;
-  const {deleteHandler} = useContact()
-  const dispatch = useDispatch()
+  const {deleteHandler ,editHandler} = useContact()
 
   const deleteContactHandler = (e) => {
     e.stopPropagation();
