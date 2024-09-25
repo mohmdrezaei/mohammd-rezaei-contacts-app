@@ -1,14 +1,6 @@
 {
   "contacts": [
     {
-      "id": "4dc46304-cae4-4977-a15b-23b44620a991",
-      "name": "ali reza",
-      "email": "ali@yahoo.com",
-      "phone": "09194426923",
-      "photo": "https://ui-avatars.com/api/?name=a&length=1&background=random&size=262",
-      "isEditing": true
-    },
-    {
       "id": "72a1f000-d704-4aae-a25c-a3da52d603f1",
       "name": "hasan2",
       "email": "hasan@gmail.com",
