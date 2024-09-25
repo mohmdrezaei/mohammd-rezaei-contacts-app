@@ -9,6 +9,7 @@ import Modal from "./modal/Modal.jsx";
 import ContactDetails from "./contactDetails/ContactDetails.jsx";
 
 import NotFoundPage from "./notFound/NotFoundPage.jsx";
+import axios from "axios";
 
 function Contacts() {
   const dispatch = useDispatch();
@@ -18,8 +19,17 @@ function Contacts() {
   const contacts = useSelector((state) => state.contact.contacts);
   const toast = useSelector((state) => state.contact.toast);
 
-  const confirmDelete = () => {
-    const newContacts = contacts.filter(
+  const confirmDelete = async() => {
+    let deletePromises;
+    if (Array.isArray(modal.ids)) {
+      deletePromises = modal.ids.map(async (id) => {
+        await axios.delete(`http://localhost:3010/contacts/${id}`);
+      });
+    } else {
+      deletePromises = [axios.delete(`http://localhost:3010/contacts/${modal.ids}`)];
+    }
+    await axios.all(deletePromises);
+     const newContacts = contacts.filter(
       (contact) => !modal.ids.includes(contact.id)
     );
     dispatch(setContacts(newContacts));
