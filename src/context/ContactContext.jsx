@@ -2,7 +2,6 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { createContext, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import {
   setContacts,
   setFilteredContacts,

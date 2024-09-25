@@ -13,7 +13,6 @@ function ContactItem(props) {
     e.stopPropagation();
    deleteHandler(data.id);
   };
- 
   
   return (
     <tr onClick={() => navigate(`contactDetails/${data.id}`)}>

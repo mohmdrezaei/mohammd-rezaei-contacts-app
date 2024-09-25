@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./ContactList.module.css";
 import ContactItem from "./ContactItem";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useContact } from "../../context/ContactContext";
 
 import warning from "../../assets/warning.png";

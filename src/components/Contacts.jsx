@@ -13,7 +13,6 @@ import NotFoundPage from "./notFound/NotFoundPage.jsx";
 
 function Contacts() {
   const dispatch = useDispatch();
-
   const { showToast } = useContact();
   const modal = useSelector((state) => state.contact.modal);
   const contacts = useSelector((state) => state.contact.contacts);
