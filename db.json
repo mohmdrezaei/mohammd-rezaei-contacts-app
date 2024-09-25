@@ -29,6 +29,13 @@
       "phone": "09123556481",
       "photo": "https://ui-avatars.com/api/?name=m&length=1&background=random&size=262",
       "isEditing": true
+    },
+    {
+      "id": "30e6cab4-f8b4-41bf-b8e7-58ca027fd461",
+      "name": "kamran",
+      "email": "kamran@gmail.com",
+      "phone": "09194456935",
+      "photo": "https://ui-avatars.com/api/?name=k&length=1&background=random&size=262"
     }
   ]
 }

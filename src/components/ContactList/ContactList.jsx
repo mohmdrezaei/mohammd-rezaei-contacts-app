@@ -1,42 +1,36 @@
 import React, { useState } from "react";
 import styles from "./ContactList.module.css";
 import ContactItem from "./ContactItem";
-import { useDispatch ,useSelector } from "react-redux";
-import { setToast } from "../../actions/actions";
-
-import warning from "../../assets/warning.png";
+import { useDispatch, useSelector } from "react-redux";
 import { useContact } from "../../context/ContactContext";
 
-
+import warning from "../../assets/warning.png";
 
 function ContactList() {
-  const dispatch = useDispatch()
-  const filteredContacts = useSelector((state) => state.contact.filteredContacts)
-  const [showCheckboxes, setShowCheckboxes] = useState(false);
-  const [selectedContacts , setSelectedContacts] = useState([])
-  const {deleteHandler} = useContact()
-  
-  const contactSelectHandler = (id)=>{
-   setSelectedContacts((selected => 
-    selected.includes(id)
-    ?selected.filter(contactId => contactId !== id)
-    : [... selected , id]
-   ))
-  }
 
-  const deleteSelectedHandler = () => { 
-    if(selectedContacts.length === 0){
-      dispatch(setToast({ show: true, message: "You must select at least one item!", icon: warning }));
-      setTimeout(() => {
-        dispatch(setToast({ show: false, message: "", icon: "" }));
-      }, 3000);
+  const { deleteHandler,showToast } = useContact();
+  const filteredContacts = useSelector((state) => state.contact.filteredContacts);
+  const [showCheckboxes, setShowCheckboxes] = useState(false);
+  const [selectedContacts, setSelectedContacts] = useState([]);
+
+  const contactSelectHandler = (id) => {
+    setSelectedContacts((selected) =>
+      selected.includes(id)
+        ? selected.filter((contactId) => contactId !== id)
+        : [...selected, id]
+    );
+  };
+
+  const deleteSelectedHandler = () => {
+    if (selectedContacts.length === 0) {
+      showToast("You must select at least one item!" , warning)
       return;
     }
     deleteHandler(selectedContacts);
     setSelectedContacts([]);
-    setShowCheckboxes(false)
+    setShowCheckboxes(false);
   };
-  
+
   return (
     <div className={styles.container}>
       <table>
@@ -48,41 +42,39 @@ function ContactList() {
             <th>
               Oprations
               {!showCheckboxes ? (
-              <img
-                title="Group Delete"
-                className={styles.groupDelete}
-                src={"./src/assets/more.png"}
-                onClick={()=>setShowCheckboxes(!showCheckboxes)}
-              />)
-              :(
-                <><img
-                title="Group Delete"
-                className={styles.groupDelete}
-                src={"./src/assets/trash-bin.png"}
-                onClick={deleteSelectedHandler}
-              />
-              <button
-              title="cancel"
-              className={styles.close}
-              onClick={() => setShowCheckboxes(false)}
-            >
-              &#10006;
-            </button>
+                <img
+                  title="Group Delete"
+                  className={styles.groupDelete}
+                  src={"./src/assets/more.png"}
+                  onClick={() => setShowCheckboxes(!showCheckboxes)}
+                />
+              ) : (
+                <>
+                  <img
+                    title="Group Delete"
+                    className={styles.groupDelete}
+                    src={"./src/assets/trash-bin.png"}
+                    onClick={deleteSelectedHandler}
+                  />
+                  <button
+                    title="cancel"
+                    className={styles.close}
+                    onClick={() => setShowCheckboxes(false)}
+                  >
+                    &#10006;
+                  </button>
                 </>
-              
               )}
             </th>
           </tr>
         </thead>
-        
+
         <thead className={styles.count}>
           <tr>
-            <td colSpan="4" >
-              Contacts ({filteredContacts.length})
-            </td>
+            <td colSpan="4">Contacts ({filteredContacts.length})</td>
           </tr>
         </thead>
-       
+
         {filteredContacts.length ? (
           <tbody>
             {filteredContacts.map((contact) => (
@@ -96,11 +88,11 @@ function ContactList() {
             ))}
           </tbody>
         ) : (
-         <tfoot>
-          <tr>
-            <td>No Contacts Yet!</td>
-          </tr>
-         </tfoot>
+          <tfoot>
+            <tr>
+              <td>No Contacts Yet!</td>
+            </tr>
+          </tfoot>
         )}
       </table>
     </div>
