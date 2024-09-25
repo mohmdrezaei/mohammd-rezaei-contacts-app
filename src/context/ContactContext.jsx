@@ -51,7 +51,8 @@ function ContactProvider({ children }) {
   };
 
   const confirmDelete = async() => {
-    let deletePromises;
+    try {
+      let deletePromises;
     if (Array.isArray(modal.ids)) {
       deletePromises = modal.ids.map(async (id) => {
         await axios.delete(`http://localhost:3010/contacts/${id}`);
@@ -72,6 +73,10 @@ function ContactProvider({ children }) {
       "./src/assets/check.png"
     );
     setModal({ show: false, ids: [] });
+    } catch (error) {
+      console.error('Error deleting contacts:', error);
+    showToast("Failed to delete contacts.", "./src/assets/warning.png");
+    }
   };
 
   const editHandler = (e, contact) => {
