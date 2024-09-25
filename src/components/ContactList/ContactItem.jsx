@@ -1,17 +1,19 @@
 import React from "react";
 import styles from "./ContactList.module.css";
-import { useContact } from "../../context/ContactContext";
+
 import { useNavigate } from "react-router-dom";
+import { useContact } from "../../context/ContactContext";
 
 function ContactItem(props) {
   const navigate = useNavigate();
   const { data, showCheckbox, contactSelectHandler, isSelected } = props;
-  const { deleteHandler, editHandler } = useContact();
+  const {deleteHandler ,editHandler} = useContact()
 
   const deleteContactHandler = (e) => {
     e.stopPropagation();
-    deleteHandler(data.id);
+   deleteHandler(data.id);
   };
+ 
   
   return (
     <tr onClick={() => navigate(`contactDetails/${data.id}`)}>

@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import styles from "./Header.module.css";
-import { useContact } from "../context/ContactContext";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setFilteredContacts, setContact } from "../actions/actions";
 
 import logo from "../assets/logo.png"
 import search from "../assets/search.png"
@@ -9,13 +10,15 @@ import add from "../assets/add.png"
 
 function Header() {
   const navigate = useNavigate()
-  const { contacts, setFilteredContacts ,setContact} = useContact();
+  const dispatch = useDispatch();
+  const contacts = useSelector((state) => state.contact.contacts);
+  
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
-    filterContacts(value);
+   filterContacts(value);
   };
 
   const filterContacts = (term) => {
@@ -24,16 +27,16 @@ function Header() {
         contact.name.toLowerCase().includes(term.toLowerCase()) ||
         contact.email.toLowerCase().includes(term.toLowerCase())
     );
-    setFilteredContacts(filtered);
+    dispatch(setFilteredContacts(filtered));
   };
   const addBtnHandler =()=>{
     navigate("addContact")
-    setContact({
+    dispatch(setContact({
       name: "",
       email: "",
       phone: "",
       photo: "",
-    }); 
+    })); 
   }
 
   return (

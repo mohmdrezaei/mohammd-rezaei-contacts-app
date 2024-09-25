@@ -1,11 +1,14 @@
 import { Link, useParams } from "react-router-dom";
-import { useContact } from "../../context/ContactContext";
+
 import styles from "./ContactDetails.module.css";
 import leftArrow from "../../assets/left-arrow.png";
+import { useContact } from "../../context/ContactContext";
+import { useSelector } from "react-redux";
 
 function ContactDetails() {
   const { id } = useParams();
-  const {contacts , editHandler} = useContact()
+  const { editHandler} = useContact()
+  const contacts = useSelector(state => state.contact.contacts)
 
   const contact = contacts.find(c => c.id === id);
   return (

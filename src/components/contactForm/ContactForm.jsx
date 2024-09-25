@@ -1,19 +1,23 @@
+import axios from "axios";
 import React, { useState } from "react";
-import styles from "./ContactForm.module.css";
-import { v4 } from "uuid";
-import success from "/src/assets/check.png";
-import { useContact } from "../../context/ContactContext";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { setContacts, setContact } from '../../actions/actions';
+import { useContact } from "../../context/ContactContext";
+import { v4 } from "uuid";
+import styles from "./ContactForm.module.css";
 
+import success from "/src/assets/check.png";
 import leftArrow from "../../assets/left-arrow.png";
 import userIcon from "../../assets/name.png";
 import emailIcon from "../../assets/email.png";
 import phoneIcon from "../../assets/phone.png";
-import axios from "axios";
 
 function contactForm() {
   const navigate = useNavigate();
-  const { contact, setContact, setContacts, showToast } = useContact();
+  const dispatch = useDispatch();
+  const {showToast} = useContact()
+  const contact = useSelector((state) => state.contact.contact)
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -22,11 +26,11 @@ function contactForm() {
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
-    setContact((contact) => ({
+    dispatch(setContact(({
       ...contact,
       [name]: value,
       photo: `https://ui-avatars.com/api/?name=${contact.name[0]}&length=1&background=random&size=262`,
-    }));
+    })));
   };
 
   const validateEmail = (email) => {
@@ -53,7 +57,7 @@ function contactForm() {
     try {
       if (Object.values(newErrors).every((error) => error === "")) {
         const newContact = { ...contact, id: v4() };
-
+ 
         if (contact.isEditing) {
           await axios.put(
             `http://localhost:3010/contacts/${contact.id}`,
@@ -65,19 +69,20 @@ function contactForm() {
           showToast("Contact added!", success);
         }
         const res = await axios.get("http://localhost:3010/contacts");
-        setContacts(res.data);
-        setContact({
+        dispatch(setContacts(res.data));
+        dispatch(setContact({
           name: "",
           email: "",
           phone: "",
           photo: "",
-        });
+        }));
         setErrors({
           name: "",
           email: "",
           phone: "",
         });
         navigate("/");
+        return;
       }
     } catch (error) {
       console.error("Error saving contact:", error);
@@ -86,12 +91,12 @@ function contactForm() {
 
   const backBtnHandler = () => {
     navigate("/");
-    setContact({
+    dispatch(setContact({
       name: "",
       email: "",
       phone: "",
       photo: "",
-    });
+    }));
   };
 
   return (
